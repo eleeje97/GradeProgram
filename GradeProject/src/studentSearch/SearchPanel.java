@@ -37,7 +37,9 @@ public class SearchPanel extends JPanel {
 		
 		//학생 검색 결과를 보여주는 패널 배치
 		searchResultPanel = new SearchResultPanel();
-		//searchResultPanel.setSize();
+		searchResultPanel.setSize(610,660);
+		searchResultPanel.setLocation(90,200);
+		add(searchResultPanel);
 		
 	}
 }
