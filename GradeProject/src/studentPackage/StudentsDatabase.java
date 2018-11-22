@@ -45,7 +45,7 @@ public class StudentsDatabase {
 		
 		scanner.close();
 	}
-	
+	/*
 	//test case
 	//학생정보파일 읽기(초기 한번만 실행)
 	public static void main(String[] args) throws IOException {
@@ -58,6 +58,6 @@ public class StudentsDatabase {
 			System.out.print(s.getName()+"/"+s.getStudentID()+"/"+s.getPhoneNumber());
 			System.out.println("");
 		}
-	}
+	}*/
 	
 }
