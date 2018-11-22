@@ -32,7 +32,7 @@ public class StudentsDatabase {
 	public void readStudentsInfoFile(String fileName) throws IOException{
 		File studentsInfoFile = new File(fileName);
 		Scanner scanner = new Scanner(studentsInfoFile);
-		
+
 		while(scanner.hasNext()) {
 			String studentID = scanner.next();
 			String name = scanner.next();
