@@ -7,8 +7,10 @@ import java.util.Vector;
 
 //학생데이터베이스를 가지고 있는 클래스
 public class StudentsDatabase {
-	//싱글턴 패턴 적용
+
+	//자기자신을 속성으로 가짐
 	private static StudentsDatabase singleton = new StudentsDatabase();
+	
 	//학생객체들이 저장되어있는 학생 데이터베이스 벡터
 	private Vector<Student> studentsDatabase = new Vector<>();
 	
@@ -42,11 +44,10 @@ public class StudentsDatabase {
 		}
 		
 		scanner.close();
-		
 	}
 	
-	/*test)
-	//학생정보파일 읽기
+	//test case
+	//학생정보파일 읽기(초기 한번만 실행)
 	public static void main(String[] args) throws IOException {
 		
 		//studentsDatabase.clear(); //기존 디비 초기화
@@ -57,6 +58,6 @@ public class StudentsDatabase {
 			System.out.print(s.getName()+"/"+s.getStudentID()+"/"+s.getPhoneNumber());
 			System.out.println("");
 		}
-	}*/
+	}
 	
 }
