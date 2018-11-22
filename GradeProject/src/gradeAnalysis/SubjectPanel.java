@@ -23,11 +23,11 @@ public class SubjectPanel extends JPanel{
 		//과목선택- 라디오버튼 을 담을 패널 = p1
 		JPanel p1 = new JPanel();
 		p1.setLayout(new FlowLayout());
-		p1.setBackground(Color.red);
+		//p1.setBackground(Color.red);
 		JLabel selectedSubject = new JLabel("과목선택");
 		selectedSubject.setFont(new Font("궁서체", Font.PLAIN, 30 ));
-		selectedSubject.setOpaque(true);
-		selectedSubject.setBackground(Color.WHITE); 
+		//selectedSubject.setOpaque(true);
+		//selectedSubject.setBackground(Color.WHITE); 
 		p1.add(selectedSubject); //라디오 그릅 부착
 		ButtonGroup subjects = new ButtonGroup();
 		
@@ -76,14 +76,19 @@ public class SubjectPanel extends JPanel{
 		add(p2, BorderLayout.CENTER); //panel1의 가운데 위치
 		
 		//콤보박스 이용해서 정렬방법
-		String[] sort = {"학번순","오름차순","내림차순"};
+		String[] sort = {"학번순","이름순","점수순"};
 		JComboBox sortbox = new JComboBox(sort);
-		p5.add(sortbox, BorderLayout.CENTER);
-		p5.add(new JLabel("     "), BorderLayout.EAST);
-		p5.setBackground(Color.green);
+		JPanel p6 = new JPanel();
+		p6.setLayout(new BorderLayout());
+		p6.add(sortbox, BorderLayout.CENTER);
+		p6.add(new JLabel("          "), BorderLayout.EAST);
+		p5.add(p6, BorderLayout.EAST);
+		p5.add(new JLabel("          "), BorderLayout.CENTER);
+		//p5.setBackground(Color.green);
 		p2.add(p5, BorderLayout.NORTH);
-		//테이블 옆에 빈공간 넣기 위해 라벨 두개 붙임
 		
+		
+		//테이블 옆에 빈공간 넣기 위해 라벨 두개 붙임
 		p2.add(new JLabel("          "),BorderLayout.WEST); 
 		p2.add(new JLabel("          "),BorderLayout.EAST);
 		
@@ -94,7 +99,7 @@ public class SubjectPanel extends JPanel{
 		JPanel p4 = new JPanel();
 		p3.setLayout(new GridLayout(2,3,0,2));
 		p4.setLayout(new BorderLayout());
-		p3.setBackground(Color.YELLOW);
+		//p3.setBackground(Color.YELLOW);
 		JLabel subjectSum = new JLabel("과목의 총합",SwingConstants.CENTER);
 		subjectSum.setFont(new Font("굴림체",Font.BOLD, 15));
 		JLabel sum = new JLabel();
