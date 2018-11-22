@@ -5,8 +5,8 @@ import javax.swing.*;
 //학생 검색 탭의 전체적인 패널
 public class StudentSearchPanel extends JPanel {
 
-	SearchPanel searchPanel = new SearchPanel(); // 좌측패널 : 학생 검색 패널
-	PiechartPanel piechartPanel = new PiechartPanel(); // 우측패널 : 과목별 성적비율 파이차트 패널
+	JPanel searchPanel = new SearchPanel(); // 좌측패널 : 학생 검색 패널
+	JPanel piechartPanel = new PiechartPanel(); // 우측패널 : 과목별 성적비율 파이차트 패널
 
 	// 생성자
 	public StudentSearchPanel() {
