@@ -18,6 +18,8 @@ public class SubjectPanel extends JPanel{
 		//panel1의 레이아웃
 		setLayout(new BorderLayout());
 		setBorder(new TitledBorder(new LineBorder(Color.darkGray,2),"과목별")); //테두리
+		//RadioBoxChecked MyIL = new RadioBoxChecked();
+		
 		//과목선택- 라디오버튼 을 담을 패널 = p1
 		JPanel p1 = new JPanel();
 		p1.setLayout(new FlowLayout());
@@ -35,6 +37,7 @@ public class SubjectPanel extends JPanel{
 			b[i] = new JRadioButton(subject[i]);
 			b[i].setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 			subjects.add(b[i]); //라디오그룹에 부착
+			//b[i].addItemListener(MyIL);
 			p1.add(b[i]); 
 		}
 		b[0].setSelected(true);
@@ -81,8 +84,8 @@ public class SubjectPanel extends JPanel{
 		p2.add(p5, BorderLayout.NORTH);
 		//테이블 옆에 빈공간 넣기 위해 라벨 두개 붙임
 		
-		p2.add(new JLabel("     "),BorderLayout.WEST); 
-		p2.add(new JLabel("     "),BorderLayout.EAST);
+		p2.add(new JLabel("          "),BorderLayout.WEST); 
+		p2.add(new JLabel("          "),BorderLayout.EAST);
 		
 		
 		
@@ -111,8 +114,8 @@ public class SubjectPanel extends JPanel{
 		p3.add(average);
 		p3.add(fileStore);
 		
-		p4.add(new JLabel("     "),BorderLayout.WEST);
-		p4.add(new JLabel("     "),BorderLayout.EAST);
+		p4.add(new JLabel("          "),BorderLayout.WEST);
+		p4.add(new JLabel("          "),BorderLayout.EAST);
 		p4.add(p3, BorderLayout.CENTER);
 		p2.add(p4, BorderLayout.SOUTH); //p2패널의 하단에 p3 패널 추가
 		
