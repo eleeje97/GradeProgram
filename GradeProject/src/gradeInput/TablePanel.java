@@ -9,7 +9,7 @@ import studentPackage.*;
 
 
 public class TablePanel extends JPanel {
-	String columnNames[] = { "학번", "이름", "국어", "영어", "수학", "사회", "과학" }; //JTable의 column이름들
+	String columnNames[] = { "학번", "이름", "국어", "영어", "수학", "사회", "과학" }; //JTable의 헤더이름들
 	//Vector<String> columnNames = new Vector(Arrays.asList(columnNamesArray));
 	Vector<Student> studentsDB = StudentsDatabase.getStudentsDatabase(); //학생정보 벡터
 	Object[][] rowData = new Object[studentsDB.size()][columnNames.length]; //테이블의 데이터배열

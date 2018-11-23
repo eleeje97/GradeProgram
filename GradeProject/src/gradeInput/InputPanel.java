@@ -1,6 +1,7 @@
 package gradeInput;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class InputPanel extends JPanel {
@@ -55,6 +56,10 @@ public class InputPanel extends JPanel {
 		inputByFile.setSelected(true); //선택되어 있는 상태로 초기화
 		inputButton.setEnabled(false); //비활성화 상태로 초기화
 		
+		//리스너 설정
+		RadioButtonListener radioListener = new RadioButtonListener();
+		inputByFile.addActionListener(radioListener);
+		inputDirect.addActionListener(radioListener);
 		
 		//컴포넌트들 InputPanel에 붙이기
 		add(inputLabel);
@@ -85,5 +90,29 @@ public class InputPanel extends JPanel {
 			add(label[i]);
 			add(textField[i]);
 		}
+	}
+	
+	class RadioButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource()==inputByFile) { //"파일로입력"버튼이 눌리면
+				importFile.setEnabled(true); //"파일불러오기"버튼 활성화
+				for (int i = 0; i < label.length; i++) {
+					textField[i].setEnabled(false); //성적 입력하는 텍스트필드 비활성화
+					textField[i].setBackground(Color.LIGHT_GRAY);
+				}
+				inputButton.setEnabled(false); //"입력"버튼 비활성화
+			} else if (e.getSource()==inputDirect) { //"직접입력"버튼이 눌리면
+				importFile.setEnabled(false); //"파일불러오기"버튼 비활성화
+				for (int i = 0; i < label.length; i++) {
+					textField[i].setEnabled(true); //성적 입력하는 텍스트필드 활성화
+					textField[i].setBackground(Color.WHITE);
+				}
+				inputButton.setEnabled(true); //"입력"버튼 활성화
+			}
+		}
+		
 	}
 }

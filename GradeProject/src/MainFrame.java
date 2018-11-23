@@ -38,7 +38,7 @@ public class MainFrame extends JFrame{
 		
 		add(tabPane);
 		
-        setSize(1920, 1030);
+        setSize(1920, 1080);
 		setVisible(true);
 	}
 }
