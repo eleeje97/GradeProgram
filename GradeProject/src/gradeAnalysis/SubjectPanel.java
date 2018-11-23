@@ -9,9 +9,23 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
+
+import studentPackage.Student;
+import studentPackage.StudentsDatabase;
+
 import java.util.*;
 
 public class SubjectPanel extends JPanel{
+	JRadioButton[] b;
+	String[] column = {"학번", "이름", "점수", "학점"};
+	Object[][] rowData = new Object[studentDatabase.size()][column.length]; //테이블의 데이터배열;
+	JTable table = new JTable(rowData,column); //JTable 추가
+	JLabel sum = new JLabel();
+	JLabel average = new JLabel();
+	int[] totalSum = CalculateGrade.getSumBySubject();
+	double[] totalAverage = CalculateGrade.getAverageBySubject();
+	private static Vector<Student> studentDatabase = StudentsDatabase.getStudentsDatabase();//학생데이터베이스 정보를 가지고왔다
+	
 	public SubjectPanel() {
 		//과목
 		String[] subject = {"국어", "영어", "수학", "사회", "과학", "전체"};
@@ -31,13 +45,13 @@ public class SubjectPanel extends JPanel{
 		p1.add(selectedSubject); //라디오 그릅 부착
 		ButtonGroup subjects = new ButtonGroup();
 		
-		JRadioButton[] b = new JRadioButton[subject.length];
+		b = new JRadioButton[subject.length];
 		//라디오 버튼 추가하기
 		for(int i = 0; i< subject.length; i++) {
 			b[i] = new JRadioButton(subject[i]);
 			b[i].setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 			subjects.add(b[i]); //라디오그룹에 부착
-			//b[i].addItemListener(MyIL);
+			b[i].addItemListener(new RadioButtonListener());
 			p1.add(b[i]); 
 		}
 		b[0].setSelected(true);
@@ -51,13 +65,20 @@ public class SubjectPanel extends JPanel{
 		p2.setLayout(new BorderLayout());
 		//p2.setBackground(Color.blue);
 		p5.setLayout(new BorderLayout());
-		String[] colum = {"학번", "이름", "점수", "학점"};
-		String[][] data = {{"A104596", "김덕성", "92", "A"},
-							{"A104216", "박덕성", "87", "B"},
-							{"A102296", "이덕성", "82", "B-"}};
-		JTable table = new JTable(data,colum); //JTable 추가
-		table.setBackground(new Color(255,255,204)); //테이블 필드 배경색
-
+		
+		
+		//rowData배열에 studentDB의 속성값들을 저장
+		for (int i = 0; i < studentDatabase.size(); i++) {
+			rowData[i][0] = studentDatabase.get(i).getStudentID();
+			rowData[i][1] = studentDatabase.get(i).getName();
+			rowData[i][2] = studentDatabase.get(i).koreaGrade;
+		}
+		
+		//table.setBackground(new Color(255,255,204)); //테이블 필드 배경색
+		//셀크기 지정
+		TableColumnModel tcm = table.getColumnModel();
+		tcm.getColumn(0).setPreferredWidth(10); //학번셀 너비 지정
+		tcm.getColumn(1).setPreferredWidth(100); //이름셀 너비 지정
 		//테이블안 내용을 가운데 정렬하기 위해서 생성
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,7 +91,8 @@ public class SubjectPanel extends JPanel{
 
 		//테이블헤더 글씨크기
 		table.getTableHeader().setFont(new Font("돋움체", Font.BOLD, 20));
-		table.setFont(new Font("돋움체", Font.PLAIN, 15));//테이블내용글자 크기 변경
+		table.setRowHeight(40); //모든 셀의 높이 지정
+		table.setFont(new Font("돋움체", Font.PLAIN, 20));//테이블내용글자 크기 변경
 		JScrollPane scroll = new JScrollPane(table); //스크롤 바 달기
 		p2.add(scroll,BorderLayout.CENTER); //p2패널의 가운데 테이블 추가	
 		add(p2, BorderLayout.CENTER); //panel1의 가운데 위치
@@ -78,6 +100,7 @@ public class SubjectPanel extends JPanel{
 		//콤보박스 이용해서 정렬방법
 		String[] sort = {"학번순","이름순","점수순"};
 		JComboBox sortbox = new JComboBox(sort);
+		sortbox.setFont(new Font("돋움체", Font.BOLD, 20));
 		JPanel p6 = new JPanel();
 		p6.setLayout(new BorderLayout());
 		p6.add(sortbox, BorderLayout.CENTER);
@@ -102,7 +125,6 @@ public class SubjectPanel extends JPanel{
 		//p3.setBackground(Color.YELLOW);
 		JLabel subjectSum = new JLabel("과목의 총합",SwingConstants.CENTER);
 		subjectSum.setFont(new Font("굴림체",Font.BOLD, 15));
-		JLabel sum = new JLabel();
 		p3.add(subjectSum);
 		sum.setOpaque(true);
 		sum.setBackground(Color.LIGHT_GRAY);
@@ -111,7 +133,6 @@ public class SubjectPanel extends JPanel{
 		
 		JLabel subjectAverage = new JLabel("과목의 평균",SwingConstants.CENTER);
 		subjectAverage.setFont(new Font("굴림체",Font.BOLD, 15));
-		JLabel average = new JLabel();
 		JButton fileStore = new JButton("파일로 저장");
 		p3.add(subjectAverage);
 		average.setOpaque(true);
@@ -123,6 +144,71 @@ public class SubjectPanel extends JPanel{
 		p4.add(new JLabel("          "),BorderLayout.EAST);
 		p4.add(p3, BorderLayout.CENTER);
 		p2.add(p4, BorderLayout.SOUTH); //p2패널의 하단에 p3 패널 추가
+		
+	}
+
+	class RadioButtonListener implements ItemListener{
+		
+		//getSumSubject와 getAverageSubject 메소드가 int배열을 return함으로 배열로 받는다.
+		
+		
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			JRadioButton radiobutton = (JRadioButton)e.getSource();
+			if(radiobutton == b[0]) { //국어과목의 라디오버튼이 체크되었을 때
+				for (int i = 0; i < studentDatabase.size(); i++) 
+					rowData[i][2] = studentDatabase.get(i).koreaGrade;
+				sum.setText(Integer.toString(totalSum[0]));
+				average.setText(Double.toString(totalAverage[0]));
+				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[0]));
+				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[0]));
+			}
+			else if(radiobutton == b[1]) {
+				for (int i = 0; i < studentDatabase.size(); i++) 
+					rowData[i][2] = studentDatabase.get(i).englishGrade;
+				sum.setText(Integer.toString(totalSum[1]));
+				average.setText(Double.toString(totalAverage[1]));
+				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[1]));
+				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[1]));
+			}
+			else if(radiobutton == b[2]) {
+				for (int i = 0; i < studentDatabase.size(); i++) 
+					rowData[i][2] = studentDatabase.get(i).mathGrade;
+				sum.setText(Integer.toString(totalSum[2]));
+				average.setText(Double.toString(totalAverage[2]));
+				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[2]));
+				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[2]));
+			}
+			else if(radiobutton == b[3]) {
+				for (int i = 0; i < studentDatabase.size(); i++) 
+					rowData[i][2] = studentDatabase.get(i).societyGrade;
+				sum.setText(Integer.toString(totalSum[3]));
+				average.setText(Double.toString(totalAverage[3]));
+				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[3]));
+				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[3]));
+			}
+			else if(radiobutton == b[4]) {
+				for (int i = 0; i < studentDatabase.size(); i++) 
+					rowData[i][2] = studentDatabase.get(i).scienceGrade;
+				sum.setText(Integer.toString(totalSum[4]));
+				average.setText(Double.toString(totalAverage[4]));
+				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[4]));
+				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[4]));
+			}
+			else if(radiobutton == b[5]) {
+				CalculateGrade.getSum_AverageByStudent();
+				String[] column = {"학번", "이름", "학점", "학점"};
+				JTable table = new JTable(rowData,column);
+				for (int i = 0; i < studentDatabase.size(); i++) 
+					rowData[i][2] = studentDatabase.get(i).average;
+				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[4]));
+				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[4]));
+			}
+			
+			table.updateUI();
+			
+		}
 		
 	}
 }
