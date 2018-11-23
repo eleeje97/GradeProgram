@@ -7,10 +7,10 @@ import java.util.*;
 import studentPackage.*;
 
 public class ReadGrade {
-	Vector<Student> studentsDatabase = StudentsDatabase.getStudentsDatabase();
+	static Vector<Student> studentsDatabase = StudentsDatabase.getStudentsDatabase();
 	
 	//생성자
-	private ReadGrade() {
+	public ReadGrade() {
 		try {
 			this.readGradeInfoFile("grade_info.txt");
 		} catch(IOException e) {
@@ -19,7 +19,7 @@ public class ReadGrade {
 	}
 	
 	//grade_info.txt파일을 읽어서 studentsDatabase에 학생 성적 속성에 값을 넣어주는 메소드
-	public void readGradeInfoFile(String fileName) throws IOException{
+	public static void readGradeInfoFile(String fileName) throws IOException{
 		File gradeInfoFile = new File(fileName);
 		Scanner scanner = new Scanner(gradeInfoFile);
 		
