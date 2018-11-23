@@ -4,44 +4,61 @@ import java.io.IOException;
 import java.util.*;
 import studentPackage.*;
 public class CalculateGrade {
-	
 	//이미 만들어진 학생데이터베이스 값을 가져와서 studentDatabase에 내용을 넣는다.
-	private Vector<Student> studentDatabase = StudentsDatabase.getStudentsDatabase();
+	private static Vector<Student> studentDatabase = StudentsDatabase.getStudentsDatabase();
+	private static int[] sum = new int[5];
+	private static int[] average = new int[5];
 	
-	//생성자
-	private CalculateGrade() {
-		try {
-			this.readGradeInfoFile("grade_info.txt");
-		}catch(IOException e) {
-			e.printStackTrace(); //자세한 예외 결과를 출력해주는 메소드
+	
+	//다섯개의 과목의 합을 구하여 반환하는 메소드
+	public static int[] getSumBySubject(){	
+		for(int i = 0; i < studentDatabase.size(); i++) {
+			Student s = studentDatabase.get(i);
+			//각 과목별로 학생들의 점수를 더한다.  
+			sum[0] += s.koreaGrade;
+			sum[1] += s.mathGrade;
+			sum[2] += s.societyGrade;
+			sum[3] += s.scienceGrade;
+			sum[4] += s.englishGrade;
 		}
+		return sum;
+	}
+	//다섯개의 괌고의 평균을 구하여 반환하는 메소드
+	public static int[] getAverageBySubject() {
+		for(int j = 0; j < sum.length; j++) 
+			average[j] = sum[j]/studentDatabase.size();
+		return average;	
 	}
 	
-	//메소드1 : grade_info.txt파일을 읽어서 studentsDatabase에 학생 성적 속성에 값을 넣어주는 메소드
-	public void readGradeInfoFile(String fileName) throws IOException{
-		File GradeInfoFile = new File(fileName);
-		Scanner scanner = new Scanner(GradeInfoFile);
+	
+	//학생별 과목 성적의 합과 평균을 구해서 studentsDatabase에 
+	public static void getSum_AverageByStudent(){
+		int[] sum = new int[50];
+		int[] average = new int [50];
 		
-		// 입력받을 인자가 계속 있다면 반복
-		while(scanner.hasNext()) {
-			int koreaGrade = scanner.nextInt();
-			int mathGrade = scanner.nextInt();
-			int societyGrade = scanner.nextInt();
-			int scienceGrade = scanner.nextInt();
-			int englishGrade = scanner.nextInt();
-			
-			//파일에서 읽어온 성적을 학생객체에 넣어준다.
-			for(Student s : studentDatabase) {
-				s.koreaGrade = koreaGrade;
-				s.mathGrade = mathGrade;
-				s.societyGrade = societyGrade;
-				s.scienceGrade = scienceGrade;
-				s.englishGrade = englishGrade;
-				
-			}
+		for(int i = 0; i < studentDatabase.size(); i++) {
+			Student s = studentDatabase.get(i);
+			sum[i] = s.koreaGrade + s.mathGrade + s.societyGrade + s.scienceGrade + s.englishGrade; 
+			average[i] = sum[i]/5;
+			s.average = average[i];	
 		}
-		scanner.close();
 	}
-}	
-	//메소드2: studentsDatabase 벡터의 모든 점수를 가져와 평균과 학점을 계산하고 다시 studentsDatabase에 학생 성적 속성에 값을 넣어주는 메소드
+	
+	//학점을 구하는 메소드
+	public String getGrade(int score) {
+	
+		switch(score) {
+		
+		}
+		return "";
+		
+	}
+	
+	//학생의 총학점을 구하여 데이터베이스에 저장해주는 메소드
+	public void studentTotalGrade() {
+		//학생의 평균을 가져와서 getGrade()
+		
+	}
+	
 
+}

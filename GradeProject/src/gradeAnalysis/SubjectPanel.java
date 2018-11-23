@@ -49,7 +49,7 @@ public class SubjectPanel extends JPanel{
 		JPanel p2 = new JPanel();
 		JPanel p5 = new JPanel(); //콤보박스를 붙이기 위한 패널
 		p2.setLayout(new BorderLayout());
-		p2.setBackground(Color.blue);
+		//p2.setBackground(Color.blue);
 		p5.setLayout(new BorderLayout());
 		String[] colum = {"학번", "이름", "점수", "학점"};
 		String[][] data = {{"A104596", "김덕성", "92", "A"},
@@ -105,7 +105,7 @@ public class SubjectPanel extends JPanel{
 		JLabel sum = new JLabel();
 		p3.add(subjectSum);
 		sum.setOpaque(true);
-		sum.setBackground(Color.WHITE);
+		sum.setBackground(Color.LIGHT_GRAY);
 		p3.add(sum);
 		p3.add(new JLabel("")); //줄 맞추기위해 추가
 		
@@ -115,7 +115,7 @@ public class SubjectPanel extends JPanel{
 		JButton fileStore = new JButton("파일로 저장");
 		p3.add(subjectAverage);
 		average.setOpaque(true);
-		average.setBackground(Color.WHITE);
+		average.setBackground(Color.LIGHT_GRAY);
 		p3.add(average);
 		p3.add(fileStore);
 		
