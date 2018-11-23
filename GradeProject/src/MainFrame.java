@@ -38,7 +38,8 @@ public class MainFrame extends JFrame{
 		
 		add(tabPane);
 		
-        setSize(1920, 1030);
+        //setSize(1920, 1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);//전체화면으로 출력하기
 		setVisible(true);
 	}
 }

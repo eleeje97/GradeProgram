@@ -2,6 +2,9 @@ package gradeAnalysis;
 
 import java.awt.*;
 import javax.swing.*;
+
+import gradeInput.ReadGrade;
+
 import java.awt.event.*;
 
 public class GradeAnalysisPanel extends JPanel {
@@ -14,8 +17,7 @@ public class GradeAnalysisPanel extends JPanel {
 		add(panel2);
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); //화면크기에 맞춰 전체로 출력하기위해 사용
 		//setVisible(true);
-	}
-	public static void main(String[] args) {
-		new GradeAnalysisPanel();
+		
+		
 	}
 }
