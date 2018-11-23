@@ -2,6 +2,7 @@ package gradeInput;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 import java.util.*;
@@ -16,11 +17,13 @@ public class InputPanel extends JPanel {
 	
 	//성적을 입력하는 라벨과 텍스트필드
 	JLabel[] label = new JLabel[6];
-	JTextField[] textField = new JTextField[6];
+	TextField[] textField = new TextField[6];
 	
 	JButton inputButton; //"입력"버튼
 	
 	String[] labelText = { "학번", "국어", "영어", "수학", "사회", "과학" };
+
+	Vector<Student> studentsDB = StudentsDatabase.getStudentsDatabase();
 	
 	public InputPanel() {
 		setLayout(null);
@@ -66,6 +69,7 @@ public class InputPanel extends JPanel {
 		ButtonListener buttonListener = new ButtonListener();
 		importFile.addActionListener(buttonListener);
 		inputButton.addActionListener(buttonListener);
+		TextFieldListener tfListener = new TextFieldListener();
 		
 		//컴포넌트들 InputPanel에 붙이기
 		add(inputLabel);
@@ -80,7 +84,7 @@ public class InputPanel extends JPanel {
 		//컴포넌트 생성, 크기와 위치 조정, InputPanel에 붙이기
 		for (int i = 0; i < labelText.length; i++) {
 			label[i] = new JLabel(labelText[i]);
-			textField[i] = new JTextField(10);
+			textField[i] = new TextField(10);
 			
 			label[i].setSize(70,50);
 			label[i].setLocation(100,350+70*i);
@@ -92,6 +96,9 @@ public class InputPanel extends JPanel {
 			
 			textField[i].setEnabled(false); //비활성화 상태로 초기화
 			textField[i].setBackground(Color.LIGHT_GRAY); //비활성화 상태일 때 배경색 지정
+			
+			textField[i].addTextListener(tfListener); //리스너 설정
+			
 			
 			add(label[i]);
 			add(textField[i]);
@@ -128,7 +135,7 @@ public class InputPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getSource()==importFile) {
-				Vector<Student> studentsDB = TablePanel.studentsDB;
+				ReadGrade.readGradeInfoFile();
 				Object[][] rowData = TablePanel.rowData;
 				
 				for (int i = 0; i < studentsDB.size(); i++) {
@@ -142,9 +149,103 @@ public class InputPanel extends JPanel {
 				TablePanel.table.updateUI();
 
 			} else if(e.getSource()==inputButton) {
-				
+				if(isInputValid().equals("true")) { //입력한 값이 조건을 만족하면
+					//학생성적을 입력한다는 메세지를 띄운다
+					int studentId = Integer.parseInt(textField[0].getText()); //학번필드의 값
+					String studentIdString = String.format("%03d", studentId); 
+					String name = studentsDB.get(studentId-1).getName(); //입력된 학번에 해당하는 학생 이름
+					JOptionPane.showMessageDialog(null, studentIdString+" "+name+" 학생의 성적을 입력합니다.");
+					
+					//학생데이터베이스에 성적 저장
+					Student s = studentsDB.get(studentId-1);
+					s.koreaGrade = Integer.parseInt(textField[1].getText());
+					s.englishGrade = Integer.parseInt(textField[2].getText());
+					s.mathGrade = Integer.parseInt(textField[3].getText());
+					s.societyGrade = Integer.parseInt(textField[4].getText());
+					s.scienceGrade = Integer.parseInt(textField[5].getText());
+					
+					//테이블에 표시
+					Object[][] rowData = TablePanel.rowData;
+					rowData[studentId-1][2] = s.koreaGrade;
+					rowData[studentId-1][3] = s.englishGrade;
+					rowData[studentId-1][4] = s.mathGrade;
+					rowData[studentId-1][5] = s.societyGrade;
+					rowData[studentId-1][6] = s.scienceGrade;
+					TablePanel.table.updateUI();
+					
+					for (int i = 0; i < textField.length; i++) {
+						textField[i].setText("");
+					}
+					
+				} else { //입력한 값이 조건을 만족하지 않으면
+					//다시 입력하라는 경고메세지
+					JOptionPane.showMessageDialog(null, isInputValid());
+				}
 			}
 		}
 		
+		
+		//입력값이 조건을 만족하는지 판단하는 메소드
+		//조건1: 모든 필드에 값이 들어있는가
+		//조건2: 입력한 학번이 존재하는가
+		//조건3: 성적 필드의 입력값이 0~100사이의 값인가
+		public String isInputValid() {
+			//조건1
+			int productOfLength = 1; //각 필드에 입력된 문자열 길이의 곱
+			for (int i = 0; i < textField.length; i++)
+				productOfLength *= textField[i].getText().length();
+			if(productOfLength==0) //문자열의 길이가 0인 필드가 하나라도 존재하면
+				return "모든 항목을 입력하세요.";
+			
+			
+			
+			//조건2
+			int studentId = Integer.parseInt(textField[0].getText()); //학번필드의 값
+			if(studentId <= 0 || studentId > 50) //학번이 존재하지 않으면
+				return "존재하지 않는 학번입니다.";
+			
+			
+			
+			//조건3
+			int[] grade = new int[5]; //성적필드의 값
+			boolean[] gradeBool = new boolean[5];
+			boolean isGradeValid = true;
+			for (int i = 0; i < grade.length; i++) {
+				grade[i] = Integer.parseInt(textField[i+1].getText());
+				if(grade[i] >= 0 && grade[i] <= 100)
+					gradeBool[i] = true;
+				else
+					gradeBool[i] = false;
+				isGradeValid = isGradeValid && gradeBool[i];
+			}
+			if(!isGradeValid)
+				return "올바른 성적을 입력하세요";
+			
+			
+			//모든 조건을 만족하면
+			return "true";
+		}
+		
 	}
+	
+	
+	//텍스트필드에 숫자가 아닌 값이 입력되면 경고메세지를 띄운다.
+	class TextFieldListener implements TextListener {
+
+		@Override
+		public void textValueChanged(TextEvent e) {
+			// TODO Auto-generated method stub
+			String str = ((TextField) e.getSource()).getText();
+			if(str.length()>0) {
+				if(!Character.isDigit(str.charAt(str.length()-1))) { //마지막에 입력된 문자가 숫자가 아니라면
+					JOptionPane.showMessageDialog(null, "숫자만 입력하세요"); //경고메세지
+					((TextField)e.getSource()).setText(str.substring(0, str.length()-1)); //마지막에 입력된 문자를 지운다.
+					((TextField)e.getSource()).setCaretPosition(str.length()-1); //그 위치부터 다시 입력할 수 있도록 한다.
+				}
+			}
+			
+		}
+		
+	}
+	
 }

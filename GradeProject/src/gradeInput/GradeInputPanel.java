@@ -8,7 +8,8 @@ public class GradeInputPanel extends JPanel{
 	public GradeInputPanel() {
 		setLayout(null);
 		
-		ReadGrade.readGradeInfoFile();
+		//ReadGrade.readGradeInfoFile(); 
+		// -> GradeInputPanel생성자에서/InputPanel의 importFile버튼의 리스너에서?
 
 		JPanel inputPanel = new InputPanel(); //왼쪽 패널
 		JPanel tablePanel = new TablePanel(); //오른쪽 패널

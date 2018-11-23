@@ -10,7 +10,6 @@ import studentPackage.*;
 
 public class TablePanel extends JPanel {
 	static String columnNames[] = { "학번", "이름", "국어", "영어", "수학", "사회", "과학" }; //JTable의 헤더이름들
-	//Vector<String> columnNames = new Vector(Arrays.asList(columnNamesArray));
 	static Vector<Student> studentsDB = StudentsDatabase.getStudentsDatabase(); //학생정보 벡터
 	static Object[][] rowData = new Object[studentsDB.size()][columnNames.length]; //테이블의 데이터배열
 	static JTable table; //학생정보를 보여줄 테이블
@@ -19,19 +18,10 @@ public class TablePanel extends JPanel {
 	public TablePanel() {
 		setLayout(null);
 		
-		//rowData배열에 studentDB의 속성값들을 저장
+		//rowData배열에 studentDB의 속성값(학번, 이름)들을 저장
 		for (int i = 0; i < studentsDB.size(); i++) {
 			rowData[i][0] = studentsDB.get(i).getStudentID();
 			rowData[i][1] = studentsDB.get(i).getName();
-			
-			/** 이 부분은 성적이 입력되면 **/
-			/*
-			rowData[i][2] = studentsDB.get(i).koreaGrade;
-			rowData[i][3] = studentsDB.get(i).englishGrade;
-			rowData[i][4] = studentsDB.get(i).mathGrade;
-			rowData[i][5] = studentsDB.get(i).societyGrade;
-			rowData[i][6] = studentsDB.get(i).scienceGrade;
-			*/
 		}
 		
 		table = new JTable(rowData, columnNames); //테이블 생성
