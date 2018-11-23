@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.util.*;
+import studentPackage.*;
+
 public class InputPanel extends JPanel {
 	JLabel inputLabel; //"입력방법" 라벨
 	ButtonGroup group; //라디오 버튼 그룹
@@ -60,6 +63,9 @@ public class InputPanel extends JPanel {
 		RadioButtonListener radioListener = new RadioButtonListener();
 		inputByFile.addActionListener(radioListener);
 		inputDirect.addActionListener(radioListener);
+		ButtonListener buttonListener = new ButtonListener();
+		importFile.addActionListener(buttonListener);
+		inputButton.addActionListener(buttonListener);
 		
 		//컴포넌트들 InputPanel에 붙이기
 		add(inputLabel);
@@ -111,6 +117,32 @@ public class InputPanel extends JPanel {
 					textField[i].setBackground(Color.WHITE);
 				}
 				inputButton.setEnabled(true); //"입력"버튼 활성화
+			}
+		}
+		
+	}
+	
+	class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource()==importFile) {
+				Vector<Student> studentsDB = TablePanel.studentsDB;
+				Object[][] rowData = TablePanel.rowData;
+				
+				for (int i = 0; i < studentsDB.size(); i++) {
+					rowData[i][2] = studentsDB.get(i).koreaGrade;
+					rowData[i][3] = studentsDB.get(i).englishGrade;
+					rowData[i][4] = studentsDB.get(i).mathGrade;
+					rowData[i][5] = studentsDB.get(i).societyGrade;
+					rowData[i][6] = studentsDB.get(i).scienceGrade;
+				}
+				
+				TablePanel.table.updateUI();
+
+			} else if(e.getSource()==inputButton) {
+				
 			}
 		}
 		

@@ -9,11 +9,11 @@ import studentPackage.*;
 
 
 public class TablePanel extends JPanel {
-	String columnNames[] = { "학번", "이름", "국어", "영어", "수학", "사회", "과학" }; //JTable의 헤더이름들
+	static String columnNames[] = { "학번", "이름", "국어", "영어", "수학", "사회", "과학" }; //JTable의 헤더이름들
 	//Vector<String> columnNames = new Vector(Arrays.asList(columnNamesArray));
-	Vector<Student> studentsDB = StudentsDatabase.getStudentsDatabase(); //학생정보 벡터
-	Object[][] rowData = new Object[studentsDB.size()][columnNames.length]; //테이블의 데이터배열
-	JTable table; //학생정보를 보여줄 테이블
+	static Vector<Student> studentsDB = StudentsDatabase.getStudentsDatabase(); //학생정보 벡터
+	static Object[][] rowData = new Object[studentsDB.size()][columnNames.length]; //테이블의 데이터배열
+	static JTable table; //학생정보를 보여줄 테이블
 	JScrollPane scrollPane;
 	
 	public TablePanel() {
@@ -35,7 +35,7 @@ public class TablePanel extends JPanel {
 		}
 		
 		table = new JTable(rowData, columnNames); //테이블 생성
-		
+				
 		
 		scrollPane = new JScrollPane(table); //테이블에 스크롤바 생성
 		scrollPane.setSize(1100,940);
