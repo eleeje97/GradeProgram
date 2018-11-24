@@ -139,7 +139,7 @@ public class InputPanel extends JPanel {
 				Object[][] rowData = TablePanel.rowData;
 				
 				for (int i = 0; i < studentsDB.size(); i++) {
-					rowData[i][2] = studentsDB.get(i).koreaGrade;
+					rowData[i][2] = studentsDB.get(i).koreanGrade;
 					rowData[i][3] = studentsDB.get(i).englishGrade;
 					rowData[i][4] = studentsDB.get(i).mathGrade;
 					rowData[i][5] = studentsDB.get(i).societyGrade;
@@ -158,7 +158,7 @@ public class InputPanel extends JPanel {
 					
 					//학생데이터베이스에 성적 저장
 					Student s = studentsDB.get(studentId-1);
-					s.koreaGrade = Integer.parseInt(textField[1].getText());
+					s.koreanGrade = Integer.parseInt(textField[1].getText());
 					s.englishGrade = Integer.parseInt(textField[2].getText());
 					s.mathGrade = Integer.parseInt(textField[3].getText());
 					s.societyGrade = Integer.parseInt(textField[4].getText());
@@ -166,7 +166,7 @@ public class InputPanel extends JPanel {
 					
 					//테이블에 표시
 					Object[][] rowData = TablePanel.rowData;
-					rowData[studentId-1][2] = s.koreaGrade;
+					rowData[studentId-1][2] = s.koreanGrade;
 					rowData[studentId-1][3] = s.englishGrade;
 					rowData[studentId-1][4] = s.mathGrade;
 					rowData[studentId-1][5] = s.societyGrade;

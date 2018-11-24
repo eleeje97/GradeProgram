@@ -21,7 +21,7 @@ public class ReadGrade {
 			while(scanner.hasNext()) {
 				Student s = studentsDatabase.get(index);
 				scanner.nextInt(); //학번
-				s.koreaGrade = scanner.nextInt(); //국어성적
+				s.koreanGrade = scanner.nextInt(); //국어성적
 				s.englishGrade = scanner.nextInt(); //영어성적
 				s.mathGrade = scanner.nextInt(); //수학성적
 				s.societyGrade = scanner.nextInt(); //사회성적
