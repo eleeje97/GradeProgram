@@ -71,7 +71,7 @@ public class SubjectPanel extends JPanel{
 		for (int i = 0; i < studentDatabase.size(); i++) {
 			rowData[i][0] = studentDatabase.get(i).getStudentID();
 			rowData[i][1] = studentDatabase.get(i).getName();
-			rowData[i][2] = studentDatabase.get(i).koreaGrade;
+			rowData[i][2] = studentDatabase.get(i).koreanGrade;
 		}
 		
 		//table.setBackground(new Color(255,255,204)); //테이블 필드 배경색
@@ -158,7 +158,7 @@ public class SubjectPanel extends JPanel{
 			JRadioButton radiobutton = (JRadioButton)e.getSource();
 			if(radiobutton == b[0]) { //국어과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) 
-					rowData[i][2] = studentDatabase.get(i).koreaGrade;
+					rowData[i][2] = studentDatabase.get(i).koreanGrade;
 				sum.setText(Integer.toString(totalSum[0]));
 				average.setText(Double.toString(totalAverage[0]));
 				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[0]));

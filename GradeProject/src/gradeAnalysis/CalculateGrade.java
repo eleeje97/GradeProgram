@@ -16,7 +16,7 @@ public class CalculateGrade {
 		for(int i = 0; i < studentDatabase.size(); i++) {
 			Student s = studentDatabase.get(i);
 			//각 과목별로 학생들의 점수를 더한다.  
-			sum[0] += s.koreaGrade; //모든 학생의 국어성적의 합
+			sum[0] += s.koreanGrade; //모든 학생의 국어성적의 합
 			sum[1] += s.englishGrade;//모든 학생의 영어성적의 합
 			sum[2] += s.mathGrade;//모든 학생의 수학성적의합
 			sum[3] += s.societyGrade;//모든 학생의 사회성적의 합
@@ -39,7 +39,7 @@ public class CalculateGrade {
 		
 		for(int i = 0; i < studentDatabase.size(); i++) {
 			Student s = studentDatabase.get(i);
-			sumByStudent[i] = s.koreaGrade + s.mathGrade + s.societyGrade + s.scienceGrade + s.englishGrade; 
+			sumByStudent[i] = s.koreanGrade + s.mathGrade + s.societyGrade + s.scienceGrade + s.englishGrade; 
 			averageByStudent[i] = sumByStudent[i]/sum.length;
 			s.average = averageByStudent[i];	
 		}
