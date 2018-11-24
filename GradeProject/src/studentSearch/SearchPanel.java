@@ -11,10 +11,7 @@ import studentPackage.Student;
 import studentPackage.StudentsDatabase;
 //학생 검색 탭의 좌측 패널
 public class SearchPanel extends JPanel {
-	
-	//학생 정보 데이터베이스
-	Vector<Student> studentsDatabase = StudentsDatabase.getStudentsDatabase(); 
-	
+		
 	JTextField searchField; //학생 검색 텍스트필드
 	JButton searchButton; //검색 버튼
 	
@@ -37,7 +34,7 @@ public class SearchPanel extends JPanel {
 		
 		//학생 검색 결과를 보여주는 패널 배치
 		searchResultPanel = new SearchResultPanel();
-		searchResultPanel.setSize(610,660);
+		searchResultPanel.setSize(610,680);
 		searchResultPanel.setLocation(90,200);
 		add(searchResultPanel);
 		
