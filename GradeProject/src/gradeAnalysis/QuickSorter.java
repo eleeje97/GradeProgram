@@ -1,37 +1,40 @@
 package gradeAnalysis;
 
-public class QuickSorter{
-    Comparable[] data;
-    public void sort(Comparable[] data) {
-        this.data = data;
-        qsort(0, data.length - 1);
+public class QuickSorter {
+    
+    public void quick(int Array[], int l, int r)
+    {
+        int left = l;
+        int right = r;
+        
+        //피봇값을 정한다.
+        int pivot = (left+right)/2;
+        
+        do
+        {
+            //중간 값이 더 크다면 left 한칸 이동한다.
+            while(Array[left]<Array[pivot]) left++;
+            //중간 값이 더 작다면 right 한칸 이동한다.
+            while(Array[pivot]<Array[right]) right--;
+            
+            //right 값이 left값보다 크거나 같다면 temp값 변경
+            if(left <= right)
+            {
+                int temp = Array[left];
+                Array[left] = Array[right];
+                Array[right] = temp;
+                
+                
+                left++;
+                right--;
+            }
+        }while(left <= right); //같거나 왼쪽이 더 크면 while문을 나간다.
+        
+        //pivot보다 작은 부분과 큰 부분을 재귀 호출 하여 비교해서 정렬
+        if(l < right) quick(Array, l, right);
+        if(left < r ) quick(Array, left, r);
+        
     }
-    private void qsort(int pre, int post) {
-        int saved_pre = pre;
-        int saved_post = post;
-        Comparable mid = data[(pre + post) / 2];
-        do {
-        	// mid보다 큰 data가 나올때까지 pre를 오른쪽으로 이동시킨다.
-            while (data[pre].compareTo(mid) < 0) {
-                pre++;
-            }
-            // mid보다 작은 data가 나올때까지 post를 왼쪽으로 이동시킨다. 
-            while (mid.compareTo(data[post]) < 0) {
-                post--;
-            }
-            if (pre <= post) {
-                Comparable tmp = data[pre];
-                data[pre] = data[post];
-                data[post] = tmp;
-                pre++;
-                post--;
-            }
-        } while (pre <= post);
-        if (saved_pre < post) {
-            qsort(saved_pre, post);
-        }
-        if (pre < saved_post) {
-            qsort(pre, saved_post);
-        }
-    }
+    
+
 }

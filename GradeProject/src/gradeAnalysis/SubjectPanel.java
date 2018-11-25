@@ -22,6 +22,7 @@ public class SubjectPanel extends JPanel{
 	JTable table = new JTable(rowData,column); //JTable 추가
 	JLabel sum = new JLabel();
 	JLabel average = new JLabel();
+	//불러온 점수의 합과 평균을 저장한다.
 	int[] totalSum = CalculateGrade.getSumBySubject();
 	double[] totalAverage = CalculateGrade.getAverageBySubject();
 	private static Vector<Student> studentDatabase = StudentsDatabase.getStudentsDatabase();//학생데이터베이스 정보를 가지고왔다
@@ -99,7 +100,7 @@ public class SubjectPanel extends JPanel{
 		
 		//콤보박스 이용해서 정렬방법
 		String[] sort = {"학번순","이름순","점수순"};
-		JComboBox sortbox = new JComboBox(sort);
+		JComboBox<String> sortbox = new JComboBox<String>(sort);
 		sortbox.setFont(new Font("돋움체", Font.BOLD, 20));
 		JPanel p6 = new JPanel();
 		p6.setLayout(new BorderLayout());
@@ -210,5 +211,27 @@ public class SubjectPanel extends JPanel{
 			
 		}
 		
+	}
+	
+	//콤보박스 리스너
+	//학번순 이름순 점수순으로 정렬한다.
+	class combBoxListener implements ItemListener{
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			JComboBox<String> combo = (JComboBox<String>)e.getSource();
+			
+			int index = combo.getSelectedIndex();
+			if(index == 1) { //학번순이 선택된다면
+			//그대로 출력하면 됨	
+					
+			
+			}
+			else if(index == 2) {//이름순이 선택되었다면
+				
+			}
+			else if(index == 3) {//점수순이 선택되었다면
+				
+			}
+		}
 	}
 }
