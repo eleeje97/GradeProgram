@@ -24,7 +24,7 @@ public class CalculateGrade {
 		}
 		return sum;
 	}
-	//다섯개의 괌고의 평균을 구하여 반환하는 메소드
+	//다섯개의 과목의 평균을 구하여 반환하는 메소드
 	public static double[] getAverageBySubject() {
 		for(int j = 0; j < sum.length; j++) 
 			average[j] = (double)sum[j]/studentDatabase.size();
