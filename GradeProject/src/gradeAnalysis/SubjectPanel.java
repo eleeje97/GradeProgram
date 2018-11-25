@@ -3,8 +3,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -39,7 +37,6 @@ public class SubjectPanel extends JPanel{
 		//과목선택- 라디오버튼 을 담을 패널 = p1
 		JPanel p1 = new JPanel();
 		p1.setLayout(new FlowLayout());
-		//p1.setBackground(Color.red);
 		JLabel selectedSubject = new JLabel("과목선택");
 		selectedSubject.setFont(new Font("궁서체", Font.PLAIN, 30 ));
 		p1.add(selectedSubject); //라디오 그릅 부착
@@ -63,15 +60,14 @@ public class SubjectPanel extends JPanel{
 		JPanel p2 = new JPanel();
 		JPanel p5 = new JPanel(); //콤보박스를 붙이기 위한 패널
 		p2.setLayout(new BorderLayout());
-		//p2.setBackground(Color.blue);
 		p5.setLayout(new BorderLayout());
-		
+	
 		
 		//rowData배열에 studentDB의 속성값들을 저장
 		for (int i = 0; i < studentDatabase.size(); i++) {
 			rowData[i][0] = studentDatabase.get(i).getStudentID();
 			rowData[i][1] = studentDatabase.get(i).getName();
-			rowData[i][2] = studentDatabase.get(i).koreanGrade;
+			//rowData[i][2] = studentDatabase.get(i).koreanGrade;
 		}
 		
 		//table.setBackground(new Color(255,255,204)); //테이블 필드 배경색

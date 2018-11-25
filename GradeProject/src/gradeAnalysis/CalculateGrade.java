@@ -37,12 +37,12 @@ public class CalculateGrade {
 	//학생별 과목 성적의 합과 평균을 구해서 studentDatabase에 저장하는 메소드
 	public static void getSum_AverageByStudent(){
 		int[] sum = new int[studentDatabase.size()];
-		int[] average = new int [studentDatabase.size()];
+		double[] average = new double [studentDatabase.size()];
 		
 		for(int i = 0; i < studentDatabase.size(); i++) {
 			Student s = studentDatabase.get(i);
 			sum[i] = s.koreanGrade + s.englishGrade + s.mathGrade + s.societyGrade + s.scienceGrade; 
-			average[i] = sum[i]/5;
+			average[i] = (double)sum[i]/5;
 			s.average = average[i];	
 		}
 	}
