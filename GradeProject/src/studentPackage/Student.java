@@ -9,8 +9,8 @@ public class Student {
 	
 	//切积 己利
 	public int koreanGrade; //惫绢 己利
-	public int mathGrade; //荐切己利
 	public int englishGrade; //康绢己利
+	public int mathGrade; //荐切己利
 	public int societyGrade; //荤雀己利
 	public int scienceGrade; //苞切己利
 	

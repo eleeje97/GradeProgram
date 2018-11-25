@@ -23,8 +23,9 @@ public class SubjectPanel extends JPanel{
 	JLabel sum = new JLabel();
 	JLabel average = new JLabel();
 	//불러온 점수의 합과 평균을 저장한다.
-	int[] totalSum = CalculateGrade.getSumBySubject();
-	double[] totalAverage = CalculateGrade.getAverageBySubject();
+	int[] totalSum;
+	double[] totalAverage;
+	
 	private static Vector<Student> studentDatabase = StudentsDatabase.getStudentsDatabase();//학생데이터베이스 정보를 가지고왔다
 	
 	public SubjectPanel() {
@@ -157,41 +158,55 @@ public class SubjectPanel extends JPanel{
 		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
 			JRadioButton radiobutton = (JRadioButton)e.getSource();
+			
+			totalSum = CalculateGrade.getSumBySubject();
+			totalAverage = CalculateGrade.getAverageBySubject();
+			
 			if(radiobutton == b[0]) { //국어과목의 라디오버튼이 체크되었을 때
-				for (int i = 0; i < studentDatabase.size(); i++) 
+				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).koreanGrade;
+					rowData[i][3] = studentDatabase.get(i).grade[0];
+				}
 				sum.setText(Integer.toString(totalSum[0]));
 				average.setText(Double.toString(totalAverage[0]));
 				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[0]));
 				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[0]));
 			}
 			else if(radiobutton == b[1]) {
-				for (int i = 0; i < studentDatabase.size(); i++) 
+				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).englishGrade;
+					rowData[i][3] = studentDatabase.get(i).grade[1];
+				}
 				sum.setText(Integer.toString(totalSum[1]));
 				average.setText(Double.toString(totalAverage[1]));
 				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[1]));
 				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[1]));
 			}
 			else if(radiobutton == b[2]) {
-				for (int i = 0; i < studentDatabase.size(); i++) 
+				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).mathGrade;
+					rowData[i][3] = studentDatabase.get(i).grade[2];
+				}
 				sum.setText(Integer.toString(totalSum[2]));
 				average.setText(Double.toString(totalAverage[2]));
 				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[2]));
 				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[2]));
 			}
 			else if(radiobutton == b[3]) {
-				for (int i = 0; i < studentDatabase.size(); i++) 
+				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).societyGrade;
+					rowData[i][3] = studentDatabase.get(i).grade[3];
+				}
 				sum.setText(Integer.toString(totalSum[3]));
 				average.setText(Double.toString(totalAverage[3]));
 				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[3]));
 				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[3]));
 			}
 			else if(radiobutton == b[4]) {
-				for (int i = 0; i < studentDatabase.size(); i++) 
+				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).scienceGrade;
+					rowData[i][3] = studentDatabase.get(i).grade[4];
+				}
 				sum.setText(Integer.toString(totalSum[4]));
 				average.setText(Double.toString(totalAverage[4]));
 				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[4]));
