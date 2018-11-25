@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import gradeAnalysis.CalculateGrade;
 import studentPackage.Student;
 import studentPackage.StudentsDatabase;
 //학생검색 탭 좌측패널 중 학생 검색 결과를 보여주는 패널
@@ -146,7 +147,9 @@ public class SearchResultPanel extends JPanel {
 		rowData[2][1] = student.mathGrade;
 		rowData[3][1] = student.societyGrade;
 		rowData[4][1] = student.scienceGrade;
-		rowData[5][1] = student.average; //총평균구해주는 CalculateGrade에 미리 계산해주는 생성자 있어야함
+		//학생의 평균 추가
+		CalculateGrade.getSum_AverageByStudent(); //평균계산
+		rowData[5][1] = student.average;
 
 		
 		//학생 학점 불러와서 테이블에 넣어주기

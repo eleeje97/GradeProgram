@@ -21,6 +21,7 @@ public class CalculateGrade {
 		}
 		return sum;
 	}
+
 	
 	//다섯개의 과목의 평균을 구하여 반환하는 메소드
 	public static double[] getAverageBySubject() {

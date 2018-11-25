@@ -3,6 +3,7 @@ package studentSearch;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class PiechartPanel extends JPanel {
 	JLabel titleLabel; //상단 제목 라벨
 
 	Student student = null; //검색된 학생
-	static List<Integer> gradeArcAngleList = new ArrayList<>(); //학생의 과목별 비율에 대한 ArcAngle을 저장해놓는 리스트
-	static List<Integer> gradeRatioList = new ArrayList<>(); //학생의 과목별 비율을 저장해놓는 리스트
+	static List<Integer> gradeArcAngleList;// = new ArrayList<>(); //학생의 과목별 비율에 대한 ArcAngle을 저장해놓는 리스트
+	static List<Integer> gradeRatioList;// = new ArrayList<>(); //학생의 과목별 비율을 저장해놓는 리스트
 	
 	Color[] colors = {
 		new Color(0x9c88ff),new Color(0x00cec9),new Color(0xfdcb6e),new Color(0xff7675),new Color(0xfd79a8)
@@ -36,6 +37,14 @@ public class PiechartPanel extends JPanel {
 		titleLabel.setSize(800,50);
 		titleLabel.setLocation(this.getWidth()+150,10);
 		add(titleLabel);
+		
+		//초기 파이차트를 그리기 위한 코드
+		gradeArcAngleList = new ArrayList<>(); 
+		gradeRatioList = new ArrayList<>();
+		for(int i=0;i<5;i++) {
+			gradeArcAngleList.add(0);
+			gradeRatioList.add(0);
+		}
 		
 		//파이차트 그리기
 		drawSearchedPiechart(student);
@@ -103,12 +112,12 @@ public class PiechartPanel extends JPanel {
 			
 		}
 		
+		//하단의 각 과목별 비율을 보여주는 문자열
 		String[] subjectNames = { "국 어","영 어","수 학","사 회","과 학"};
 		for(int index=0;index<gradeRatioList.size();index++){ 
 			g.setColor(colors[index]);
 			g.setFont(new Font("바탕체",Font.BOLD,25));
 			g.drawString(subjectNames[index]+" : "+gradeRatioList.get(index)+"%",150+index*180,900); 
 		}
-		 
 	}
 }
