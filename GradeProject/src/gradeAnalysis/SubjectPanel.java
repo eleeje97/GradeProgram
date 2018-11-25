@@ -42,8 +42,6 @@ public class SubjectPanel extends JPanel{
 		//p1.setBackground(Color.red);
 		JLabel selectedSubject = new JLabel("과목선택");
 		selectedSubject.setFont(new Font("궁서체", Font.PLAIN, 30 ));
-		//selectedSubject.setOpaque(true);
-		//selectedSubject.setBackground(Color.WHITE); 
 		p1.add(selectedSubject); //라디오 그릅 부착
 		ButtonGroup subjects = new ButtonGroup();
 		
@@ -56,7 +54,7 @@ public class SubjectPanel extends JPanel{
 			b[i].addItemListener(new RadioButtonListener());
 			p1.add(b[i]); 
 		}
-		b[0].setSelected(true);
+		//b[0].setSelected(true);
 		add(p1, BorderLayout.NORTH); //panel1의 상단에 위치
 		
 		
@@ -117,8 +115,6 @@ public class SubjectPanel extends JPanel{
 		p2.add(new JLabel("          "),BorderLayout.WEST); 
 		p2.add(new JLabel("          "),BorderLayout.EAST);
 		
-		
-		
 		//과목의 총합 과 과목의 평균 & 파일로 저장 버튼을 담는 패널 = p3
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
@@ -141,7 +137,6 @@ public class SubjectPanel extends JPanel{
 		average.setBackground(Color.LIGHT_GRAY);
 		p3.add(average);
 		p3.add(fileStore);
-		
 		p4.add(new JLabel("          "),BorderLayout.WEST);
 		p4.add(new JLabel("          "),BorderLayout.EAST);
 		p4.add(p3, BorderLayout.CENTER);
@@ -150,10 +145,7 @@ public class SubjectPanel extends JPanel{
 	}
 
 	class RadioButtonListener implements ItemListener{
-		
 		//getSumSubject와 getAverageSubject 메소드가 int배열을 return함으로 배열로 받는다.
-		
-		
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
@@ -161,17 +153,15 @@ public class SubjectPanel extends JPanel{
 			
 			totalSum = CalculateGrade.getSumBySubject();
 			totalAverage = CalculateGrade.getAverageBySubject();
-			
+			CalculateGrade.calculateGrade();
 			if(radiobutton == b[0]) { //국어과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).koreanGrade;
 					rowData[i][3] = studentDatabase.get(i).grade[0];
 				}
 				sum.setText(Integer.toString(totalSum[0]));
-				average.setText(Double.toString(totalAverage[0]));
-				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[0]));
-				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[0]));
-			}
+				average.setText(Double.toString(totalAverage[0]));			
+				}
 			else if(radiobutton == b[1]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).englishGrade;
@@ -179,8 +169,6 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[1]));
 				average.setText(Double.toString(totalAverage[1]));
-				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[1]));
-				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[1]));
 			}
 			else if(radiobutton == b[2]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
@@ -189,8 +177,6 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[2]));
 				average.setText(Double.toString(totalAverage[2]));
-				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[2]));
-				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[2]));
 			}
 			else if(radiobutton == b[3]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
@@ -199,8 +185,6 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[3]));
 				average.setText(Double.toString(totalAverage[3]));
-				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[3]));
-				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[3]));
 			}
 			else if(radiobutton == b[4]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
@@ -209,8 +193,6 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[4]));
 				average.setText(Double.toString(totalAverage[4]));
-				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[4]));
-				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[4]));
 			}
 			else if(radiobutton == b[5]) {
 				CalculateGrade.getSum_AverageByStudent();
@@ -218,8 +200,6 @@ public class SubjectPanel extends JPanel{
 				JTable table = new JTable(rowData,column);
 				for (int i = 0; i < studentDatabase.size(); i++) 
 					rowData[i][2] = studentDatabase.get(i).average;
-				//sum.setText(Integer.toString(CalculateGrade.getSumBySubject()[4]));
-				//average.setText(Integer.toString(CalculateGrade.getAverageBySubject()[4]));
 			}
 			
 			table.updateUI();
