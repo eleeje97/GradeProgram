@@ -26,7 +26,7 @@ public class SearchPanel extends JPanel {
 		searchField.setFont(new Font("굴림체",Font.PLAIN,15));
 		searchField.setSize(500,50);
 		searchField.setLocation(90,100);
-		searchField.addActionListener(new showSearchResultListener()); //엔터를 누르면 '검색'버튼 누른것과 동일한 효과
+		searchField.addActionListener(new ShowSearchResultListener()); //엔터를 누르면 '검색'버튼 누른것과 동일한 효과
 		searchField.addMouseListener(new setFieldClearListener()); //초기 텍스트필드를 지우고 검색받을 준비를 한다.
 		add(searchField);
 		
@@ -35,8 +35,7 @@ public class SearchPanel extends JPanel {
 		searchButton.setFont(new Font("굴림체",Font.BOLD,15));
 		searchButton.setSize(80,50);
 		searchButton.setLocation(620,100);
-		searchButton.addActionListener(new showSearchResultListener()); //검색을 누르면 검색 결과보여주기
-		//showSearchResultListener()는 SearchResultPanel.java 에 있음
+		searchButton.addActionListener(new ShowSearchResultListener()); //검색을 누르면 검색 결과보여주기
 		add(searchButton);
 		
 		//학생 검색 결과를 보여주는 패널 배치

@@ -6,7 +6,7 @@ import javax.swing.*;
 public class StudentSearchPanel extends JPanel {
 
 	JPanel searchPanel = new SearchPanel(); // 좌측패널 : 학생 검색 패널
-	JPanel piechartPanel = new PiechartPanel(); // 우측패널 : 과목별 성적비율 파이차트 패널
+	JPanel piechartPanel = PiechartPanel.singleton ; // 우측패널 : 과목별 성적비율 파이차트 패널
 
 	// 생성자
 	public StudentSearchPanel() {
