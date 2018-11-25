@@ -14,8 +14,9 @@ public class Student {
 	public int societyGrade; //사회성적
 	public int scienceGrade; //과학성적
 	
-	public char grade; //학생 학점
 	public double average; //학생 평균
+	public String grade[] = new String[5]; //과목별 학점
+	public String totalGrade; //총점
 	
 	//생성자
 	public Student(String studentID, String name, String phoneNumber) {
