@@ -125,9 +125,12 @@ public class SubjectPanel extends JPanel{
 		p3.add(sum);
 		p3.add(new JLabel("")); //줄 맞추기위해 추가
 		
+		
 		JLabel subjectAverage = new JLabel("과목의 평균",SwingConstants.CENTER);
 		subjectAverage.setFont(new Font("굴림체",Font.BOLD, 15));
 		JButton fileStore = new JButton("파일로 저장");
+		
+		fileStore.addActionListener(new StoreFileListener());
 		p3.add(subjectAverage);
 		average.setOpaque(true);
 		average.setBackground(Color.LIGHT_GRAY);
@@ -146,18 +149,20 @@ public class SubjectPanel extends JPanel{
 		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
 			JRadioButton radiobutton = (JRadioButton)e.getSource();
-			
 			totalSum = CalculateGrade.getSumBySubject();
 			totalAverage = CalculateGrade.getAverageBySubject();
 			CalculateGrade.calculateGrade();
 			if(radiobutton == b[0]) { //국어과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).koreanGrade;
-					rowData[i][3] = studentDatabase.get(i).grade[0];
+					rowData[i][3] = studentDatabase.get(i).grade[0];	
+					
 				}
 				sum.setText(Integer.toString(totalSum[0]));
 				average.setText(Double.toString(totalAverage[0]));			
-				}
+				GraphPanel.paintGraph(rowData,0);
+				
+			}
 			else if(radiobutton == b[1]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).englishGrade;
@@ -165,6 +170,7 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[1]));
 				average.setText(Double.toString(totalAverage[1]));
+				GraphPanel.paintGraph(rowData ,1);
 			}
 			else if(radiobutton == b[2]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
@@ -173,6 +179,8 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[2]));
 				average.setText(Double.toString(totalAverage[2]));
+				GraphPanel.paintGraph(rowData,2);
+
 			}
 			else if(radiobutton == b[3]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
@@ -181,6 +189,8 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[3]));
 				average.setText(Double.toString(totalAverage[3]));
+				GraphPanel.paintGraph(rowData,3);
+
 			}
 			else if(radiobutton == b[4]) {
 				for (int i = 0; i < studentDatabase.size(); i++) {
@@ -189,13 +199,14 @@ public class SubjectPanel extends JPanel{
 				}
 				sum.setText(Integer.toString(totalSum[4]));
 				average.setText(Double.toString(totalAverage[4]));
+				GraphPanel.paintGraph(rowData,4);
 			}
 			else if(radiobutton == b[5]) {
 				CalculateGrade.getSum_AverageByStudent();
-				String[] column = {"학번", "이름", "학점", "학점"};
-				JTable table = new JTable(rowData,column);
-				for (int i = 0; i < studentDatabase.size(); i++) 
+				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).average;
+					rowData[i][3] = studentDatabase.get(i).totalGrade;
+				}
 			}
 			
 			table.updateUI();
