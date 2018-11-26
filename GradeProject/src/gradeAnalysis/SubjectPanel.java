@@ -151,7 +151,9 @@ public class SubjectPanel extends JPanel{
 			JRadioButton radiobutton = (JRadioButton)e.getSource();
 			totalSum = CalculateGrade.getSumBySubject();
 			totalAverage = CalculateGrade.getAverageBySubject();
+			CalculateGrade.getSum_AverageByStudent();
 			CalculateGrade.calculateGrade();
+			
 			if(radiobutton == b[0]) { //국어과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).koreanGrade;
@@ -202,10 +204,10 @@ public class SubjectPanel extends JPanel{
 				GraphPanel.paintGraph(rowData,4);
 			}
 			else if(radiobutton == b[5]) {
-				CalculateGrade.getSum_AverageByStudent();
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).average;
 					rowData[i][3] = studentDatabase.get(i).totalGrade;
+					System.out.println(rowData[i][2]+" "+rowData[i][3]);
 				}
 			}
 			
