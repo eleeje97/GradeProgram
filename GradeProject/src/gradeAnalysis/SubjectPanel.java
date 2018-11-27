@@ -41,8 +41,9 @@ public class SubjectPanel extends JPanel{
 		selectedSubject.setFont(new Font("궁서체", Font.PLAIN, 30 ));
 		p1.add(selectedSubject); //라디오 그릅 부착
 		ButtonGroup subjects = new ButtonGroup();
-		
 		b = new JRadioButton[subject.length];
+		
+		
 		//라디오 버튼 추가하기
 		for(int i = 0; i< subject.length; i++) {
 			b[i] = new JRadioButton(subject[i]);
@@ -51,9 +52,7 @@ public class SubjectPanel extends JPanel{
 			b[i].addItemListener(new RadioButtonListener());
 			p1.add(b[i]); 
 		}
-		//b[0].setSelected(true);
 		add(p1, BorderLayout.NORTH); //panel1의 상단에 위치
-		
 		
 		
 		//테이블과 p3패널을 담을 패널 = p2
@@ -63,27 +62,26 @@ public class SubjectPanel extends JPanel{
 		p5.setLayout(new BorderLayout());
 	
 		
-		//rowData배열에 studentDB의 속성값들을 저장
+		//rowData배열에 studentDB의 속성값들을 저장한다.
 		for (int i = 0; i < studentDatabase.size(); i++) {
 			rowData[i][0] = studentDatabase.get(i).getStudentID();
 			rowData[i][1] = studentDatabase.get(i).getName();
-			//rowData[i][2] = studentDatabase.get(i).koreanGrade;
 		}
 		
-		//table.setBackground(new Color(255,255,204)); //테이블 필드 배경색
-		//셀크기 지정
+		//셀크기 지정한다.
 		TableColumnModel tcm = table.getColumnModel();
 		tcm.getColumn(0).setPreferredWidth(10); //학번셀 너비 지정
 		tcm.getColumn(1).setPreferredWidth(100); //이름셀 너비 지정
-		//테이블안 내용을 가운데 정렬하기 위해서 생성
+		
+		
+		//테이블안 내용을 가운데 정렬하기 위해서 생성한다.
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
 		TableColumnModel tcmSchedule = table.getColumnModel();
 		for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
 
 			tcmSchedule.getColumn(i).setCellRenderer(dtcr);
-
-			}
+		}
 
 		//테이블헤더 글씨크기
 		table.getTableHeader().setFont(new Font("돋움체", Font.BOLD, 20));
@@ -116,7 +114,9 @@ public class SubjectPanel extends JPanel{
 		JPanel p4 = new JPanel();
 		p3.setLayout(new GridLayout(2,3,0,2));
 		p4.setLayout(new BorderLayout());
-		//p3.setBackground(Color.YELLOW);
+		
+		
+		//과목의 총합
 		JLabel subjectSum = new JLabel("과목의 총합",SwingConstants.CENTER);
 		subjectSum.setFont(new Font("굴림체",Font.BOLD, 15));
 		p3.add(subjectSum);
@@ -126,10 +126,12 @@ public class SubjectPanel extends JPanel{
 		p3.add(new JLabel("")); //줄 맞추기위해 추가
 		
 		
+		//과목의 평균
 		JLabel subjectAverage = new JLabel("과목의 평균",SwingConstants.CENTER);
 		subjectAverage.setFont(new Font("굴림체",Font.BOLD, 15));
 		JButton fileStore = new JButton("파일로 저장");
 		
+		//파일 저장하는 리스너를 추가한다.
 		fileStore.addActionListener(new StoreFileListener());
 		p3.add(subjectAverage);
 		average.setOpaque(true);
@@ -142,7 +144,9 @@ public class SubjectPanel extends JPanel{
 		p2.add(p4, BorderLayout.SOUTH); //p2패널의 하단에 p3 패널 추가
 		
 	}
-
+	
+	
+	//라디오 버튼이 체크되었을 때 
 	class RadioButtonListener implements ItemListener{
 		//getSumSubject와 getAverageSubject 메소드가 int배열을 return함으로 배열로 받는다.
 		@Override
@@ -165,7 +169,7 @@ public class SubjectPanel extends JPanel{
 				GraphPanel.paintGraph(rowData,0);
 				
 			}
-			else if(radiobutton == b[1]) {
+			else if(radiobutton == b[1]) {//영어과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).englishGrade;
 					rowData[i][3] = studentDatabase.get(i).grade[1];
@@ -174,7 +178,7 @@ public class SubjectPanel extends JPanel{
 				average.setText(Double.toString(totalAverage[1]));
 				GraphPanel.paintGraph(rowData ,1);
 			}
-			else if(radiobutton == b[2]) {
+			else if(radiobutton == b[2]) {//수학과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).mathGrade;
 					rowData[i][3] = studentDatabase.get(i).grade[2];
@@ -184,7 +188,7 @@ public class SubjectPanel extends JPanel{
 				GraphPanel.paintGraph(rowData,2);
 
 			}
-			else if(radiobutton == b[3]) {
+			else if(radiobutton == b[3]) {//사회과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).societyGrade;
 					rowData[i][3] = studentDatabase.get(i).grade[3];
@@ -194,7 +198,7 @@ public class SubjectPanel extends JPanel{
 				GraphPanel.paintGraph(rowData,3);
 
 			}
-			else if(radiobutton == b[4]) {
+			else if(radiobutton == b[4]) {//과학과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).scienceGrade;
 					rowData[i][3] = studentDatabase.get(i).grade[4];
@@ -203,12 +207,13 @@ public class SubjectPanel extends JPanel{
 				average.setText(Double.toString(totalAverage[4]));
 				GraphPanel.paintGraph(rowData,4);
 			}
-			else if(radiobutton == b[5]) {
+			else if(radiobutton == b[5]) {//전체 라디오버튼이 체크되었을 때
+				
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).average;
 					rowData[i][3] = studentDatabase.get(i).totalGrade;
-					System.out.println(rowData[i][2]+" "+rowData[i][3]);
 				}
+				//GraphPanel.paintGraph(rowData,5);
 			}
 			
 			table.updateUI();
@@ -217,25 +222,5 @@ public class SubjectPanel extends JPanel{
 		
 	}
 	
-	//콤보박스 리스너
-	//학번순 이름순 점수순으로 정렬한다.
-	class combBoxListener implements ItemListener{
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			JComboBox<String> combo = (JComboBox<String>)e.getSource();
-			
-			int index = combo.getSelectedIndex();
-			if(index == 1) { //학번순이 선택된다면
-			//그대로 출력하면 됨	
-					
-			
-			}
-			else if(index == 2) {//이름순이 선택되었다면
-				
-			}
-			else if(index == 3) {//점수순이 선택되었다면
-				
-			}
-		}
-	}
+	
 }
