@@ -153,14 +153,15 @@ public class SearchResultPanel extends JPanel {
 
 		
 		//학생 학점 불러와서 테이블에 넣어주기
-		/*
-		for(int subjectCount=0;subjectCount<rowData.length;subjectCount++){
-			rowData[subjectCount][2] = student.;
+		CalculateGrade.calculateGrade(); //학점 계산해서 db에 저장
+		String[] studentGrades = student.grade; //학생의  학점을 배열로 가져옴
+		
+		for(int subjectCount=0;subjectCount<rowData.length-1;subjectCount++){
+			rowData[subjectCount][2] = studentGrades[subjectCount];
 		}
 
-		//총 학점평균도 CalculateGrade에서 계산 ? 그냥 학점 다 가져와서 더하고 /5해줄까
-		 * 
-		*/
+		//총 학점평균 테이블에 넣어주기
+		rowData[5][2] = student.totalGrade;
 
 		//넣어준 테이블셀 값 업데이트 해주기
 		studentGradesTable.updateUI();
