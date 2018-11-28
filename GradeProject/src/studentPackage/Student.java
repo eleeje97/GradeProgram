@@ -16,7 +16,7 @@ public class Student{
 	
 	public double average; //ÇÐ»ý Æò±Õ
 	public String grade[] = new String[5]; //°ú¸ñº° ÇÐÁ¡
-	public String totalGrade; //ÃÑÁ¡
+	public double totalGrade; //ÃÑÁ¡
 	
 	//»ý¼ºÀÚ
 	public Student(String studentID, String name, String phoneNumber) {

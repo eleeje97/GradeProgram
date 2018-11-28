@@ -51,7 +51,6 @@ public class CalculateGrade {
 	//과목별 학점과 총점을 구하여 데이터베이스에 저장해주는 메소드
 	public static void calculateGrade() {
 		int[] scoreArray = new int[studentDatabase.size()];
-		double[] averageArray = new double[studentDatabase.size()];
 		String[] gradeArray = new String[studentDatabase.size()];
 		int[] rank;
 		
@@ -96,12 +95,8 @@ public class CalculateGrade {
 			studentDatabase.get(i).grade[4] = gradeArray[i];
 		
 		//총점계산
-		for (int i = 0; i < averageArray.length; i++)
-			averageArray[i] = studentDatabase.get(i).average;
-		rank = getAverageRank(averageArray);
-		gradeArray = getGrade(rank);
-		for (int i = 0; i < gradeArray.length; i++) 
-			studentDatabase.get(i).totalGrade = gradeArray[i];
+		for (int i = 0; i < studentDatabase.size(); i++) 
+			studentDatabase.get(i).totalGrade = getTotalGrade(i);
 	}
 	
 	
@@ -155,25 +150,32 @@ public class CalculateGrade {
 		
 	}
 	
+	public static double getTotalGrade(int index) {
+		Student s = studentDatabase.get(index);
+		double totalGrade = 0;
+		
+		for (int i = 0; i < s.grade.length; i++) {
+			totalGrade += gradeToScore(s.grade[i]);
+		}
+		
+		return totalGrade/s.grade.length;
+		
+	}
 	
-	//평균점수에 순위를 매겨주는 메소드
-	public static int[] getAverageRank(double[] averageArray) {
-		int[] rank = new int[studentDatabase.size()];
+	public static double gradeToScore(String grade) {
+		String[] grades = {"A+", "A0", "B+", "B0", "C+", "C0", "D+", "D0", "F"};
+		double[] scores = {4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0};
 		
-		//모든 순위를 1로 초기화
-		for (int i = 0; i < rank.length; i++)
-			rank[i] = 1;
+		double score = 0;
 		
-		for (int i = 0; i < averageArray.length; i++) {
-			for (int j = 0; j < averageArray.length; j++) {
-				if((double)averageArray[i] < (double)averageArray[j])
-					rank[i]++;
+		for (int i = 0; i < grades.length; i++) {
+			if(grade.equals(grades[i])) {
+				score = scores[i];
+				break;
 			}
 		}
 		
-		return rank;
-		
+		return score;
 	}
-		
 	
 }
