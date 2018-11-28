@@ -1,9 +1,11 @@
 package gradeAnalysis;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
@@ -12,6 +14,7 @@ import java.util.Comparator;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -36,6 +39,8 @@ public class SubjectPanel extends JPanel{
 	JLabel sum = new JLabel();
 	JLabel average = new JLabel();
 	//불러온 점수의 합과 평균을 저장한다.
+	JPanel labelPanel;
+	JPanel buttonPanel;
 	int[] totalSum;
 	double[] totalAverage;
 	JComboBox<String> sortbox; //콤보박스 초기화를 위해 빼놓음
@@ -127,37 +132,59 @@ public class SubjectPanel extends JPanel{
 		p2.add(new JLabel("          "),BorderLayout.EAST);
 		
 		//과목의 총합 과 과목의 평균 & 파일로 저장 버튼을 담는 패널 = p3
-		JPanel p3 = new JPanel();
+		JPanel labelButtonPanel = new JPanel();
+		labelPanel = new JPanel(); //라벨을 붙이는 패널
+		buttonPanel = new JPanel(); //버튼을 붙이는 패널
 		JPanel p4 = new JPanel();
-		p3.setLayout(new GridLayout(2,3,0,2));
+		labelButtonPanel.setLayout(new CardLayout());
+		//labelButtonPanel.add(new JLabel(" "), BorderLayout.NORTH);
+		//labelButtonPanel.add(new JLabel(" "), BorderLayout.SOUTH);
+		labelPanel.setLayout(new GridLayout(2,2,5,5));
+		buttonPanel.setLayout(new BorderLayout());
+		labelButtonPanel.add(labelPanel);
+		labelButtonPanel.add(buttonPanel);
 		p4.setLayout(new BorderLayout());
 		
 		
 		//과목의 총합
 		JLabel subjectSum = new JLabel("과목의 총합",SwingConstants.CENTER);
-		subjectSum.setFont(new Font("굴림체",Font.BOLD, 15));
-		p3.add(subjectSum);
+		subjectSum.setFont(new Font("굴림체",Font.BOLD, 17));
+		sum.setFont(new Font("굴림체",Font.BOLD, 15));
+		labelPanel.add(subjectSum);
 		sum.setOpaque(true);
 		sum.setBackground(Color.LIGHT_GRAY);
-		p3.add(sum);
-		p3.add(new JLabel("")); //줄 맞추기위해 추가
+		labelPanel.add(sum);
+		//labelPanel.add(new JLabel("")); //줄 맞추기위해 추가
 		
 		
 		//과목의 평균
 		JLabel subjectAverage = new JLabel("과목의 평균",SwingConstants.CENTER);
-		subjectAverage.setFont(new Font("굴림체",Font.BOLD, 15));
-		JButton fileStore = new JButton("파일로 저장");
+		subjectAverage.setFont(new Font("굴림체",Font.BOLD, 17));
+		average.setFont(new Font("굴림체",Font.BOLD, 15));
 		
+		//버튼 이미지 (파일로 저장)
+		ImageIcon originalIcon = new ImageIcon("images/store2.jpg");
+		Image originImg = originalIcon.getImage(); 
+		Image storeImage = originImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon storeIcon = new ImageIcon(storeImage);
+
+		JButton fileStore = new JButton(storeIcon);
+		fileStore.setBorderPainted(false);
+		fileStore.setFocusPainted(false);
+		fileStore.setContentAreaFilled(false);
+
+		JLabel store = new JLabel("파일을 저장하려면 버튼을 눌러주세요!");
 		//파일 저장하는 리스너를 추가한다.
 		fileStore.addActionListener(new StoreFileListener());
-		p3.add(subjectAverage);
+		labelPanel.add(subjectAverage);
 		average.setOpaque(true);
 		average.setBackground(Color.LIGHT_GRAY);
-		p3.add(average);
-		p3.add(fileStore);
+		labelPanel.add(average);
+		buttonPanel.add(fileStore, BorderLayout.EAST);
+		buttonPanel.add(store, BorderLayout.CENTER);
 		p4.add(new JLabel("          "),BorderLayout.WEST);
 		p4.add(new JLabel("          "),BorderLayout.EAST);
-		p4.add(p3, BorderLayout.CENTER);
+		p4.add(labelButtonPanel, BorderLayout.CENTER);
 		p2.add(p4, BorderLayout.SOUTH); //p2패널의 하단에 p3 패널 추가
 		
 	}
@@ -177,6 +204,15 @@ public class SubjectPanel extends JPanel{
 			CalculateGrade.getSum_AverageByStudent();
 			CalculateGrade.calculateGrade();
 			
+			if(radiobutton != b[5]) {
+				labelPanel.setVisible(true);
+				buttonPanel.setVisible(false);
+			}
+			else
+				labelPanel.setVisible(false);
+				buttonPanel.setVisible(true);
+				
+				
 			if(radiobutton == b[0]) { //국어과목의 라디오버튼이 체크되었을 때
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).koreanGrade;
@@ -227,7 +263,6 @@ public class SubjectPanel extends JPanel{
 				GraphPanel.paintGraph(rowData,4);
 			}
 			else if(radiobutton == b[5]) {//전체 라디오버튼이 체크되었을 때
-				
 				for (int i = 0; i < studentDatabase.size(); i++) {
 					rowData[i][2] = studentDatabase.get(i).average;
 					rowData[i][3] = studentDatabase.get(i).totalGrade;
