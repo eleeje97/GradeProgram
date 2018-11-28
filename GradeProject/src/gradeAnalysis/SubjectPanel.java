@@ -1,8 +1,25 @@
 package gradeAnalysis;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Vector;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -10,8 +27,6 @@ import javax.swing.table.TableColumnModel;
 
 import studentPackage.Student;
 import studentPackage.StudentsDatabase;
-
-import java.util.*;
 
 public class SubjectPanel extends JPanel{
 	JRadioButton[] b;
@@ -23,6 +38,7 @@ public class SubjectPanel extends JPanel{
 	//불러온 점수의 합과 평균을 저장한다.
 	int[] totalSum;
 	double[] totalAverage;
+	JComboBox<String> sortbox; //콤보박스 초기화를 위해 빼놓음
 	
 	private static Vector<Student> studentDatabase = StudentsDatabase.getStudentsDatabase();//학생데이터베이스 정보를 가지고왔다
 	
@@ -95,7 +111,7 @@ public class SubjectPanel extends JPanel{
 		
 		//콤보박스 이용해서 정렬방법
 		String[] sort = {"학번순","이름순","점수순"};
-		JComboBox<String> sortbox = new JComboBox<String>(sort);
+		sortbox = new JComboBox<String>(sort);
 		sortbox.setFont(new Font("돋움체", Font.BOLD, 20));
 		JPanel p6 = new JPanel();
 		p6.setLayout(new BorderLayout());
@@ -105,6 +121,7 @@ public class SubjectPanel extends JPanel{
 		p5.add(new JLabel("          "), BorderLayout.CENTER);
 		//p5.setBackground(Color.green);
 		p2.add(p5, BorderLayout.NORTH);
+		sortbox.addItemListener(new CombBoxListener()); //리스너 추가
 		
 		
 		//테이블 옆에 빈공간 넣기 위해 라벨 두개 붙임
@@ -142,12 +159,14 @@ public class SubjectPanel extends JPanel{
 		p2.add(p4, BorderLayout.SOUTH); //p2패널의 하단에 p3 패널 추가
 		
 	}
-
+	
 	class RadioButtonListener implements ItemListener{
 		//getSumSubject와 getAverageSubject 메소드가 int배열을 return함으로 배열로 받는다.
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
+			//****과목을 다시 선택하면 정렬방식은 학점순이다.
+			sortbox.setSelectedIndex(0);
 			JRadioButton radiobutton = (JRadioButton)e.getSource();
 			totalSum = CalculateGrade.getSumBySubject();
 			totalAverage = CalculateGrade.getAverageBySubject();
@@ -219,23 +238,28 @@ public class SubjectPanel extends JPanel{
 	
 	//콤보박스 리스너
 	//학번순 이름순 점수순으로 정렬한다.
-	class combBoxListener implements ItemListener{
+	class CombBoxListener implements ItemListener{
+	    
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			JComboBox<String> combo = (JComboBox<String>)e.getSource();
+			JComboBox<String> combo = (JComboBox)e.getSource();
+		    
+			//현재 rowData 넘겨주기
+			QuickSorter quickSorter = new QuickSorter(rowData);
+
+			if(combo.getSelectedItem().equals("학번순")) {
+				quickSorter.sort(0); //지금 선택한 정렬방법을 넘겨준다.
+			}
+			else if(combo.getSelectedItem().equals("이름순")) {
+				quickSorter.sort(1);
+			}
+			else if(combo.getSelectedItem().equals("점수순")) {
+				quickSorter.sort(2);
+
+			}
 			
-			int index = combo.getSelectedIndex();
-			if(index == 1) { //학번순이 선택된다면
-			//그대로 출력하면 됨	
-					
-			
-			}
-			else if(index == 2) {//이름순이 선택되었다면
-				
-			}
-			else if(index == 3) {//점수순이 선택되었다면
-				
-			}
+			table.updateUI();
 		}
+		
 	}
 }

@@ -1,6 +1,6 @@
 package studentPackage;
 //학생 클래스
-public class Student {
+public class Student{
 	
 	//학생 정보
 	private String studentID; //학번
@@ -50,4 +50,5 @@ public class Student {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 }

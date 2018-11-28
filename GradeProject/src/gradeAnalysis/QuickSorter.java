@@ -1,40 +1,64 @@
 package gradeAnalysis;
 
-public class QuickSorter {
-    
-    public void quick(int Array[], int l, int r)
-    {
-        int left = l;
-        int right = r;
-        
-        //피봇값을 정한다.
-        int pivot = (left+right)/2;
-        
-        do
-        {
-            //중간 값이 더 크다면 left 한칸 이동한다.
-            while(Array[left]<Array[pivot]) left++;
-            //중간 값이 더 작다면 right 한칸 이동한다.
-            while(Array[pivot]<Array[right]) right--;
-            
-            //right 값이 left값보다 크거나 같다면 temp값 변경
-            if(left <= right)
-            {
-                int temp = Array[left];
-                Array[left] = Array[right];
-                Array[right] = temp;
-                
-                
-                left++;
-                right--;
-            }
-        }while(left <= right); //같거나 왼쪽이 더 크면 while문을 나간다.
-        
-        //pivot보다 작은 부분과 큰 부분을 재귀 호출 하여 비교해서 정렬
-        if(l < right) quick(Array, l, right);
-        if(left < r ) quick(Array, left, r);
-        
+import javax.swing.JRadioButton;
+
+public class QuickSorter{
+	
+	Object[][] data;
+	int sortMethod; //콤보박스에서 선택한 정렬방법을 저장.
+	//생성자
+	public QuickSorter(Object[][] rowData) {
+		this.data = rowData;
+	}
+	
+    public void sort(int sortMethod) {
+    	this.sortMethod = sortMethod; //현재 선택한 정렬방법을 저장 = 표의 열index임
+    	
+    	qsort(0, data.length- 1,sortMethod);
     }
     
+    private void qsort(int pre, int post, int sortMethod) {
+    	
+        int saved_pre = pre;
+        int saved_post = post;
+        
+        Object mid = data[(pre + post) / 2][sortMethod];
+       
+        do {
+			if (sortMethod == 2) { // 선택한 정렬 항목이 성적인 경우에만 내림차순
+				// mid보다 큰 data가 나올때까지 pre를 오른쪽으로 이동시킨다.
+				while (((Comparable) data[pre][sortMethod]).compareTo(mid) > 0) {
+					pre++;
+				}
+				// mid보다 작은 data가 나올때까지 post를 왼쪽으로 이동시킨다.
+				while (((Comparable) mid).compareTo(data[post][sortMethod]) > 0) {
+					post--;
+				}
+			}else { //선택한 정렬 항목이 학번,이름인 경우는 오름차순
+				// mid보다 큰 data가 나올때까지 pre를 오른쪽으로 이동시킨다.
+				while (((Comparable) data[pre][sortMethod]).compareTo(mid) < 0) {
+					pre++;
+				}
+				// mid보다 작은 data가 나올때까지 post를 왼쪽으로 이동시킨다.
+				while (((Comparable) mid).compareTo(data[post][sortMethod]) < 0) {
+					post--;
+				}
+			}
+            if (pre <= post) {
+                Object[] tmp = data[pre];
+                data[pre] = data[post];
+                data[post] = tmp;
+                pre++;
+                post--;
+            }
+        } while (pre <= post);
+        if (saved_pre < post) {
+            qsort(saved_pre, post,sortMethod);
+        }
+        if (pre < saved_post) {
+            qsort(pre, saved_post,sortMethod);
+        }
+    }
 
 }
+ 
