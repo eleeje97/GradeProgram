@@ -213,7 +213,7 @@ public class SubjectPanel extends JPanel{
 					rowData[i][2] = studentDatabase.get(i).average;
 					rowData[i][3] = studentDatabase.get(i).totalGrade;
 				}
-				//GraphPanel.paintGraph(rowData,5);
+				GraphPanel.paintGraph(rowData,5);
 			}
 			
 			table.updateUI();
