@@ -2,6 +2,8 @@ package gradeInput;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.*;
 import java.util.*;
 
@@ -17,7 +19,7 @@ public class TablePanel extends JPanel {
 	
 	public TablePanel() {
 		setLayout(null);
-		
+		setBorder(new TitledBorder(new LineBorder(Color.GRAY,2)));
 		//rowData배열에 studentDB의 속성값(학번, 이름)들을 저장
 		for (int i = 0; i < studentsDB.size(); i++) {
 			rowData[i][0] = studentsDB.get(i).getStudentID();
@@ -28,8 +30,8 @@ public class TablePanel extends JPanel {
 				
 		
 		scrollPane = new JScrollPane(table); //테이블에 스크롤바 생성
-		scrollPane.setSize(1100,940);
-		scrollPane.setLocation(0,0);
+		scrollPane.setSize(1086,935);
+		scrollPane.setLocation(7,12);
 		
 		
 		TableColumnModel tcm = table.getColumnModel();

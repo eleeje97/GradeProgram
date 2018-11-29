@@ -50,14 +50,14 @@ public class SubjectPanel extends JPanel{
 		String[] subject = {"국어", "영어", "수학", "사회", "과학", "전체"};
 		//panel1의 레이아웃
 		setLayout(new BorderLayout());
-		setBorder(new TitledBorder(new LineBorder(Color.darkGray,2),"과목별")); //테두리
+		setBorder(new TitledBorder(new LineBorder(Color.GRAY,2),"과목별")); //테두리
 		//RadioBoxChecked MyIL = new RadioBoxChecked();
 		
 		//과목선택- 라디오버튼 을 담을 패널 = p1
 		JPanel p1 = new JPanel();
 		p1.setLayout(new FlowLayout());
 		JLabel selectedSubject = new JLabel("과목선택");
-		selectedSubject.setFont(new Font("궁서체", Font.PLAIN, 30 ));
+		selectedSubject.setFont(new Font("한초롬돋움", Font.PLAIN, 30 ));
 		p1.add(selectedSubject); //라디오 그릅 부착
 		ButtonGroup subjects = new ButtonGroup();
 		b = new JRadioButton[subject.length];
@@ -66,7 +66,7 @@ public class SubjectPanel extends JPanel{
 		//라디오 버튼 추가하기
 		for(int i = 0; i< subject.length; i++) {
 			b[i] = new JRadioButton(subject[i]);
-			b[i].setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+			b[i].setFont(new Font("한초롬돋움", Font.PLAIN, 20));
 			subjects.add(b[i]); //라디오그룹에 부착
 			b[i].addItemListener(new RadioButtonListener());
 			p1.add(b[i]); 
@@ -103,9 +103,9 @@ public class SubjectPanel extends JPanel{
 		}
 
 		//테이블헤더 글씨크기
-		table.getTableHeader().setFont(new Font("돋움체", Font.BOLD, 20));
+		table.getTableHeader().setFont(new Font("한초롬돋움", Font.BOLD, 20));
 		table.setRowHeight(40); //모든 셀의 높이 지정
-		table.setFont(new Font("돋움체", Font.PLAIN, 20));//테이블내용글자 크기 변경
+		table.setFont(new Font("함초롬돋움", Font.PLAIN, 20));//테이블내용글자 크기 변경
 		JScrollPane scroll = new JScrollPane(table); //스크롤 바 달기
 		p2.add(scroll,BorderLayout.CENTER); //p2패널의 가운데 테이블 추가	
 		add(p2, BorderLayout.CENTER); //panel1의 가운데 위치
@@ -113,7 +113,7 @@ public class SubjectPanel extends JPanel{
 		//콤보박스 이용해서 정렬방법
 		String[] sort = {"학번순","이름순","점수순"};
 		sortbox = new JComboBox<String>(sort);
-		sortbox.setFont(new Font("돋움체", Font.BOLD, 20));
+		sortbox.setFont(new Font("함초롬돋움", Font.BOLD, 20));
 		JPanel p6 = new JPanel();
 		p6.setLayout(new BorderLayout());
 		p6.add(sortbox, BorderLayout.CENTER);
@@ -146,19 +146,19 @@ public class SubjectPanel extends JPanel{
 		
 		//과목의 총합
 		JLabel subjectSum = new JLabel("과목의 총합",SwingConstants.CENTER);
-		subjectSum.setFont(new Font("굴림체",Font.BOLD, 17));
-		sum.setFont(new Font("굴림체",Font.BOLD, 15));
+		subjectSum.setFont(new Font("함초롬돋움",Font.BOLD, 17));
+		sum.setFont(new Font("함초롬돋움",Font.BOLD, 15));
 		labelPanel.add(subjectSum);
 		sum.setOpaque(true);
-		sum.setBackground(Color.LIGHT_GRAY);
+		sum.setBackground(new Color(0xD9D9D9));
 		labelPanel.add(sum);
 		//labelPanel.add(new JLabel("")); //줄 맞추기위해 추가
 		
 		
 		//과목의 평균
 		JLabel subjectAverage = new JLabel("과목의 평균",SwingConstants.CENTER);
-		subjectAverage.setFont(new Font("굴림체",Font.BOLD, 17));
-		average.setFont(new Font("굴림체",Font.BOLD, 15));
+		subjectAverage.setFont(new Font("함초롬돋움",Font.BOLD, 17));
+		average.setFont(new Font("함초롬돋움",Font.BOLD, 15));
 		
 		//버튼 이미지 (파일로 저장)
 		ImageIcon originalIcon = new ImageIcon("images/store2.jpg");
@@ -172,13 +172,15 @@ public class SubjectPanel extends JPanel{
 		fileStore.setContentAreaFilled(false);
 
 		JLabel store = new JLabel("파일을 저장하려면 버튼을 눌러주세요!");
+		//
+		store.setFont(new Font("함초롬돋움",Font.BOLD, 15));
 		store.setHorizontalAlignment(JLabel.RIGHT);
 
 		//파일 저장하는 리스너를 추가한다.
 		fileStore.addActionListener(new StoreFileListener());
 		labelPanel.add(subjectAverage);
 		average.setOpaque(true);
-		average.setBackground(Color.LIGHT_GRAY);
+		average.setBackground(new Color(0xD9D9D9));
 		labelPanel.add(average);
 		buttonPanel.add(fileStore, BorderLayout.EAST);
 		buttonPanel.add(store, BorderLayout.CENTER);

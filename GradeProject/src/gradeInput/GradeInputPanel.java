@@ -14,11 +14,12 @@ public class GradeInputPanel extends JPanel{
 		JPanel inputPanel = new InputPanel(); //왼쪽 패널
 		JPanel tablePanel = new TablePanel(); //오른쪽 패널
 		
-		inputPanel.setSize(800,950);
+		inputPanel.setSize(810,971);
 		inputPanel.setLocation(0,0);
-		tablePanel.setSize(1100,950);
-		tablePanel.setLocation(800,0);
+		tablePanel.setSize(1099,960);
+		tablePanel.setLocation(813,8);
 		
+
 		
 		add(inputPanel);
 		add(tablePanel);

@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import java.util.*;
 import studentPackage.*;
@@ -27,7 +29,7 @@ public class InputPanel extends JPanel {
 	
 	public InputPanel() {
 		setLayout(null);
-		//setBackground(Color.WHITE); //test용
+		setBorder(new TitledBorder(new LineBorder(Color.GRAY,2),"두비두밥 오뚜기밥"));
 		
 		//각 컴포넌트들 생성
 		inputLabel = new JLabel("입력방법");
@@ -51,7 +53,7 @@ public class InputPanel extends JPanel {
 		inputButton.setLocation(500,800);
 		
 		//폰트 조정
-		Font font = new Font("Gothic",Font.PLAIN,25);
+		Font font = new Font("한초롬돋움",Font.PLAIN,25);
 		inputLabel.setFont(font);
 		inputByFile.setFont(font);
 		inputDirect.setFont(font);

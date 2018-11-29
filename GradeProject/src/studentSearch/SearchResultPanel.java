@@ -1,6 +1,7 @@
 package studentSearch;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
@@ -47,40 +50,40 @@ public class SearchResultPanel extends JPanel {
 	//생성자
 	public SearchResultPanel() {
 		setLayout(null);
-		
+		//setBorder(new TitledBorder(new LineBorder(Color.GRAY,2),"검색 결과"));
 		//학생정보들의 제목 배치
 		for(int labelCount=0; labelCount<fixedTitleLabel.length; labelCount++) {
 			
-			fixedTitleLabel[labelCount].setFont(new Font("굴림체",Font.BOLD,20));
+			fixedTitleLabel[labelCount].setFont(new Font("함초롬돋움",Font.BOLD,20));
 			fixedTitleLabel[labelCount].setSize(120,30);
-			fixedTitleLabel[labelCount].setLocation(0,30+60*labelCount);
+			fixedTitleLabel[labelCount].setLocation(5,30+60*labelCount);
 			add(fixedTitleLabel[labelCount]);
 		}
 		
 		/*검색된 학생 정보 라벨 배치*/
 		//1)학생 이름라벨
 		studentNameLabel = new JLabel("");
-		studentNameLabel.setFont(new Font("굴림체",Font.PLAIN,20));
+		studentNameLabel.setFont(new Font("함초롬돋움",Font.PLAIN,20));
 		studentNameLabel.setSize(120,30);
-		studentNameLabel.setLocation(180,30);
+		studentNameLabel.setLocation(150,30);
 		add(studentNameLabel);
 		//2)학생 학번라벨
 		studentIDLabel = new JLabel("");
-		studentIDLabel.setFont(new Font("굴림체",Font.PLAIN,20));
+		studentIDLabel.setFont(new Font("함초롬돋움",Font.PLAIN,20));
 		studentIDLabel.setSize(120,30);
-		studentIDLabel.setLocation(180,90);
+		studentIDLabel.setLocation(150,90);
 		add(studentIDLabel);	
 		//3)학생 번호라벨
 		studentPhoneLabel = new JLabel("");
-		studentPhoneLabel.setFont(new Font("굴림체",Font.PLAIN,20));
+		studentPhoneLabel.setFont(new Font("함초롬돋움",Font.PLAIN,20));
 		studentPhoneLabel.setSize(250,30);
-		studentPhoneLabel.setLocation(180,150);
+		studentPhoneLabel.setLocation(150,150);
 		add(studentPhoneLabel);	
 		//4)성적이 입력되었는지를 알려주는 라벨
 		studentGradeAvailableLabel = new JLabel("성적입력 탭에서 학생의 성적을 먼저 입력하세요.");
-		studentGradeAvailableLabel.setFont(new Font("굴림체",Font.BOLD,15));
+		studentGradeAvailableLabel.setFont(new Font("함초롬돋움",Font.BOLD,15));
 		studentGradeAvailableLabel.setSize(500,30);
-		studentGradeAvailableLabel.setLocation(180,210);
+		studentGradeAvailableLabel.setLocation(150,210);
 		studentGradeAvailableLabel.setVisible(false); //초기에는 안보이는 상태
 		
 		add(studentGradeAvailableLabel);
@@ -93,15 +96,15 @@ public class SearchResultPanel extends JPanel {
 		studentGradesTable.setRowHeight(50); //각 행들의 높이 조절
 		studentGradesTable.getTableHeader().setPreferredSize(new Dimension(50,50)); //헤더의 높이 조절
 		//테이블 내 글씨체 설정
-		studentGradesTable.getTableHeader().setFont(new Font("돋움체", Font.BOLD, 20)); //헤더글씨체
-		studentGradesTable.setFont(new Font("돋움체", Font.PLAIN, 20)); //셀 글씨체
+		studentGradesTable.getTableHeader().setFont(new Font("함초롬돋움", Font.BOLD, 20)); //헤더글씨체
+		studentGradesTable.setFont(new Font("함초롬돋움", Font.PLAIN, 20)); //셀 글씨체
 
 		//각 셀의 글자 가운데 정렬 
 		setTextAlignCenter(studentGradesTable);
 		
 		JPanel tablePanel = new JPanel(new BorderLayout());	//성적 테이블 붙일 패널 -> 없으면 헤더가 안보임
-		tablePanel.setSize(610,350);
-		tablePanel.setLocation(0,270);
+		tablePanel.setSize(601,350);
+		tablePanel.setLocation(4,270);
 		tablePanel.add(studentGradesTable, BorderLayout.CENTER);
 		tablePanel.add(studentGradesTable.getTableHeader(), BorderLayout.NORTH);
 		add(tablePanel);

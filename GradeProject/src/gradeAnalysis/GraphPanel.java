@@ -23,9 +23,9 @@ public class GraphPanel extends JPanel {
 
 	public GraphPanel() {
 		setLayout(new BorderLayout(5, 0));
-		setBorder(new TitledBorder(new LineBorder(Color.darkGray, 2), "과목별 점수 분포도")); // 테두리
+		setBorder(new TitledBorder(new LineBorder(Color.GRAY, 2), "과목별 점수 분포도")); // 테두리
 		JLabel label = new JLabel("<과목별 점수 분포도>", SwingConstants.CENTER);
-		label.setFont(new Font("궁서체", Font.ITALIC, 30));
+		label.setFont(new Font("한초롬돋움", Font.ITALIC, 30));
 		add(label, BorderLayout.NORTH);
 		
 		JPanel graph = new JPanel(); // 그래프들을 담을 패널 생성
@@ -35,7 +35,7 @@ public class GraphPanel extends JPanel {
 		emptypanel.setLayout(new BorderLayout());
 		JLabel msg = new JLabel("과목을 선택하여 주세요!", SwingConstants.CENTER);
 		msg.setForeground(Color.GRAY);
-		msg.setFont(new Font("돋움체", Font.PLAIN, 30));
+		msg.setFont(new Font("한초롬돋움", Font.PLAIN, 30));
 		emptypanel.add(msg, BorderLayout.CENTER);
 		graph.add(emptypanel);
 		graph.add(subjectgraph); // 과목별 그래프를 붙인다.
@@ -102,6 +102,7 @@ class SubjectGraph extends JPanel {
 
 		// x축
 		int width = 0;
+		g.setFont(new Font("한초롬돋움", Font.PLAIN,12));
 		g.drawString("학생수", 65, 70);
 		for (int x = 0; x <= 100; x += 20) {
 			g.drawLine(80 + width, 800, 80 + width, 820);
@@ -111,7 +112,7 @@ class SubjectGraph extends JPanel {
 
 		// y축
 		int height = 0;
-		g.drawString("점수", 915, 805);
+		g.drawString("점수", 912, 805);
 		for (int y = 0; y < 800; y += 160) {
 			g.drawLine(80, 800 - y, 55, 800 - y);
 			g.drawString("" + height, 30, 805 - y);
@@ -146,7 +147,7 @@ class TotalGraph extends JPanel {
 		// 전체 축
 		g.drawLine(80, 800, 900, 800);
 		g.drawLine(80, 800, 80, 80);
-
+		g.setFont(new Font("한초롬돋움", Font.PLAIN,12));
 		int width = 80;
 		g.drawString("점수", 65, 70);
 		for (int x = 0; x <= 90; x += 20) {
@@ -162,7 +163,7 @@ class TotalGraph extends JPanel {
 
 		// y축
 		int height = 0;
-		g.drawString("과목", 915, 805);
+		g.drawString("과목", 912, 805);
 		for (int y = 0; y < 650; y += 64) {
 			g.drawLine(80, 800 - y, 60, 800 - y);
 			g.drawString("" + height, 35, 805 - y);

@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import studentPackage.Student;
 
@@ -30,10 +32,13 @@ public class PiechartPanel extends JPanel {
 	//생성자
 	private PiechartPanel() {
 		setLayout(null);
-		
+		 
 		//상단 제목라벨 배치
 		titleLabel = new JLabel("< 과목별 성적 비율 Chart >",SwingConstants.CENTER);
-		titleLabel.setFont(new Font("궁서체", Font.BOLD, 30));
+		titleLabel.setFont(new Font("함초롬돋움", Font.ITALIC, 30));
+		//setBorder(new TitledBorder(null,titleLabel.getText(), TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		
+		setBorder(new TitledBorder(new LineBorder(Color.GRAY,2)));
 		titleLabel.setSize(800,50);
 		titleLabel.setLocation(this.getWidth()+150,10);
 		add(titleLabel);
@@ -103,10 +108,10 @@ public class PiechartPanel extends JPanel {
 			g.setColor(colors[index]);
 			//마지막 과목까지 색칠했지만 360도까지 꽉 안차는 경우 남은 곳까지 색칠한다.
 			if(index == gradeArcAngleList.size()-1) {
-				g.fillArc(250,100,650,650,startAngle,360-startAngle);
+				g.fillArc(225,100,650,650,startAngle,360-startAngle);
 			}
 			else {
-				g.fillArc(250,100,650,650,startAngle,gradeArcAngleList.get(index));
+				g.fillArc(225,100,650,650,startAngle,gradeArcAngleList.get(index));
 			}
 			startAngle = startAngle + gradeArcAngleList.get(index);
 			
@@ -116,7 +121,7 @@ public class PiechartPanel extends JPanel {
 		String[] subjectNames = { "국 어","영 어","수 학","사 회","과 학"};
 		for(int index=0;index<gradeRatioList.size();index++){ 
 			g.setColor(colors[index]);
-			g.setFont(new Font("바탕체",Font.BOLD,25));
+			g.setFont(new Font("함초롬돋움",Font.BOLD,25));
 			g.drawString(subjectNames[index]+" : "+gradeRatioList.get(index)+"%",150+index*180,900); 
 		}
 	}
