@@ -14,7 +14,7 @@ import java.util.Vector;
 public class GraphPanel extends JPanel {
 	static JPanel subjectgraph = new SubjectGraph();
 	static JPanel totalgraph = new TotalGraph();
-	static JPanel p = new JPanel();
+	static JPanel emptypanel = new JPanel(); // 라디오 버튼이 아무것도 선택되지 않았을 때
 	static Color[] colors = { new Color(0x9c88ff), new Color(0x00cec9), new Color(0xfdcb6e), new Color(0xff7675),
 			new Color(0xfd79a8) };
 	static int index;
@@ -31,7 +31,13 @@ public class GraphPanel extends JPanel {
 		JPanel graph = new JPanel(); // 그래프들을 담을 패널 생성
 		graph.setLayout(new CardLayout()); // 카드레이아웃으로 지정한다.
 		
-		graph.add(p);
+		//emtyPanel
+		emptypanel.setLayout(new BorderLayout());
+		JLabel msg = new JLabel("과목을 선택하여 주세요!", SwingConstants.CENTER);
+		msg.setForeground(Color.GRAY);
+		msg.setFont(new Font("돋움체", Font.PLAIN, 30));
+		emptypanel.add(msg, BorderLayout.CENTER);
+		graph.add(emptypanel);
 		graph.add(subjectgraph); // 과목별 그래프를 붙인다.
 		graph.add(totalgraph); // 전체 그래프를 붙인다.
 
@@ -45,14 +51,14 @@ public class GraphPanel extends JPanel {
 		if(index==5) { //전체 라디오 버튼이 선택되었을 때
 			average = CalculateGrade.getAverageBySubject();
 			totalgraph.repaint();
-			p.setVisible(false);
+			emptypanel.setVisible(false);
 			totalgraph.setVisible(true);
 			subjectgraph.setVisible(false);
 		} else { //과목별 라디오 버튼이 선택되었을 때
 			countScore(rowData);
 			subjectgraph.repaint();
 			subjectgraph.repaint();
-			p.setVisible(false);
+			emptypanel.setVisible(false);
 			subjectgraph.setVisible(true);
 			totalgraph.setVisible(false);
 		}
