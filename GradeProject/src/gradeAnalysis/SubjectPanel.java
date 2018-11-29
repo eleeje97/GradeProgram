@@ -6,18 +6,15 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Vector;
+import java.awt.event.*;
+import java.util.*;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -25,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.OptionPaneUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
@@ -174,6 +172,8 @@ public class SubjectPanel extends JPanel{
 		fileStore.setContentAreaFilled(false);
 
 		JLabel store = new JLabel("파일을 저장하려면 버튼을 눌러주세요!");
+		store.setHorizontalAlignment(JLabel.RIGHT);
+
 		//파일 저장하는 리스너를 추가한다.
 		fileStore.addActionListener(new StoreFileListener());
 		labelPanel.add(subjectAverage);

@@ -38,7 +38,7 @@ public class TablePanel extends JPanel {
 		table.getTableHeader().setPreferredSize(new Dimension(scrollPane.getWidth(),30)); //헤더 높이 지정
 		table.setRowHeight(40); //모든 셀의 높이 지정
 		table.setFont(new Font("Gothic",Font.PLAIN,20)); //폰트 지정
-		//table.setEnabled(false); //비활성화
+		table.setEnabled(false); //비활성화
 		
 		
 		//셀 가운데 정렬
