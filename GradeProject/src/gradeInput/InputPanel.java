@@ -29,15 +29,16 @@ public class InputPanel extends JPanel {
 	
 	public InputPanel() {
 		setLayout(null);
-		setBorder(new TitledBorder(new LineBorder(Color.GRAY,2),"두비두밥 오뚜기밥"));
+		setBorder(new TitledBorder(new LineBorder(Color.GRAY,2),"학생 성적 입력"));
 		
 		//각 컴포넌트들 생성
-		inputLabel = new JLabel("입력방법");
+		inputLabel = new JLabel("입력방법", SwingConstants.CENTER);
 		group = new ButtonGroup();
 		inputByFile = new JRadioButton("파일로 입력");
 		inputDirect = new JRadioButton("직접 입력");
 		importFile = new JButton("파일 불러오기");
 		inputButton = new JButton("입력");
+
 		
 		
 		//크기와 위치 조정
@@ -53,7 +54,7 @@ public class InputPanel extends JPanel {
 		inputButton.setLocation(500,800);
 		
 		//폰트 조정
-		Font font = new Font("한초롬돋움",Font.PLAIN,25);
+		Font font = new Font("한초롬돋움",Font.PLAIN,20);
 		inputLabel.setFont(font);
 		inputByFile.setFont(font);
 		inputDirect.setFont(font);

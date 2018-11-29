@@ -23,7 +23,7 @@ public class GraphPanel extends JPanel {
 
 	public GraphPanel() {
 		setLayout(new BorderLayout(5, 0));
-		setBorder(new TitledBorder(new LineBorder(Color.GRAY, 2), "과목별 점수 분포도")); // 테두리
+		setBorder(new TitledBorder(new LineBorder(Color.GRAY, 2),"막대 그래프")); // 테두리
 		JLabel label = new JLabel("<과목별 점수 분포도>", SwingConstants.CENTER);
 		label.setFont(new Font("한초롬돋움", Font.ITALIC, 30));
 		add(label, BorderLayout.NORTH);
