@@ -14,6 +14,7 @@ import java.util.Vector;
 public class GraphPanel extends JPanel {
 	static JPanel subjectgraph = new SubjectGraph();
 	static JPanel totalgraph = new TotalGraph();
+	static JPanel p = new JPanel();
 	static Color[] colors = { new Color(0x9c88ff), new Color(0x00cec9), new Color(0xfdcb6e), new Color(0xff7675),
 			new Color(0xfd79a8) };
 	static int index;
@@ -26,10 +27,11 @@ public class GraphPanel extends JPanel {
 		JLabel label = new JLabel("<과목별 점수 분포도>", SwingConstants.CENTER);
 		label.setFont(new Font("궁서체", Font.ITALIC, 30));
 		add(label, BorderLayout.NORTH);
-
+		
 		JPanel graph = new JPanel(); // 그래프들을 담을 패널 생성
 		graph.setLayout(new CardLayout()); // 카드레이아웃으로 지정한다.
 		
+		graph.add(p);
 		graph.add(subjectgraph); // 과목별 그래프를 붙인다.
 		graph.add(totalgraph); // 전체 그래프를 붙인다.
 
@@ -43,12 +45,15 @@ public class GraphPanel extends JPanel {
 		if(index==5) { //전체 라디오 버튼이 선택되었을 때
 			average = CalculateGrade.getAverageBySubject();
 			totalgraph.repaint();
+			p.setVisible(false);
 			totalgraph.setVisible(true);
 			subjectgraph.setVisible(false);
 		} else { //과목별 라디오 버튼이 선택되었을 때
 			countScore(rowData);
 			subjectgraph.repaint();
 			subjectgraph.repaint();
+			p.setVisible(false);
+			subjectgraph.setVisible(true);
 			totalgraph.setVisible(false);
 		}
 		
