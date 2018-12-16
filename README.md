@@ -1,10 +1,10 @@
 # Grade Program
 
-###1. 프로젝트 소개
+### 1. 프로젝트 소개
 
 ![first](JavaProject_readme_img/slide1.JPG)
 
-###2. 협업 방식
+### 2. 협업 방식
 
 ![first](JavaProject_readme_img/slide2.JPG)
 
@@ -14,16 +14,16 @@
 
 ![first](JavaProject_readme_img/slide5.JPG)
 
-###3. 프로젝트 설계도 : 클래스다이어그램
+### 3. 프로젝트 설계도 : 클래스다이어그램
 ![first](JavaProject_readme_img/slide6.JPG)
 
-###4. 프로젝트 세부 구조와 세부 기능
-####1) 메인
+### 4. 프로젝트 세부 구조와 세부 기능
+#### 1) 메인
 * javax.swing.JTabbedPane 사용해서 '성적입력', '성적분석', '학생검색' 탭 구성
 
 ![first](JavaProject_readme_img/slide7.JPG)
 
-####2) 성적 입력 Tab
+#### 2) 성적 입력 Tab
 
 ![first](JavaProject_readme_img/slide8.JPG)
 
@@ -38,7 +38,7 @@
 
 ![first](JavaProject_readme_img/slide12.JPG)
 
-####3) 성적 분석 Tab
+#### 3) 성적 분석 Tab
 
 ![first](JavaProject_readme_img/slide13.JPG)
 
@@ -84,7 +84,7 @@
 
 ![first](JavaProject_readme_img/slide26.JPG)
 
-####4) 학생 검색 Tab
+#### 4) 학생 검색 Tab
 
 ![first](JavaProject_readme_img/slide27.JPG)
 
@@ -97,8 +97,8 @@
 
 ![first](JavaProject_readme_img/slide29.JPG)
 
-###5. 개발 시 유의한 부분 : 예외처리
-####1) 성적 입력 Tab
+### 5. 개발 시 유의한 부분 : 예외처리
+#### 1) 성적 입력 Tab
 
 ![first](JavaProject_readme_img/slide30.JPG)
 
@@ -108,7 +108,7 @@
 
 ![first](JavaProject_readme_img/slide33.JPG)
 
-####2) 학생 검색 Tab
+#### 2) 학생 검색 Tab
 
 ![first](JavaProject_readme_img/slide34.JPG)
 
@@ -116,7 +116,7 @@
 
 ![first](JavaProject_readme_img/slide36.JPG)
 
-###6. 개발 후, 아쉬웠던 점
+### 6. 개발 후, 아쉬웠던 점
 
 ![first](JavaProject_readme_img/slide37.JPG)
 
