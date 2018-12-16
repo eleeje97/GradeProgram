@@ -159,7 +159,7 @@ public class InputPanel extends JPanel {
 					String name = studentsDB.get(studentId-1).getName(); //입력된 학번에 해당하는 학생 이름
 					JOptionPane.showMessageDialog(null, studentIdString+" "+name+" 학생의 성적을 입력합니다.");
 					
-					//학생데이터베이스에 성적 저장
+					//학생데이터베이스에 성적 업데이트
 					Student s = studentsDB.get(studentId-1);
 					s.koreanGrade = Integer.parseInt(textField[1].getText());
 					s.englishGrade = Integer.parseInt(textField[2].getText());

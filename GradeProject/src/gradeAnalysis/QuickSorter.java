@@ -26,11 +26,11 @@ public class QuickSorter{
        
         do {
 			if (sortMethod == 2) { // 선택한 정렬 항목이 성적인 경우에만 내림차순
-				// mid보다 큰 data가 나올때까지 pre를 오른쪽으로 이동시킨다.
+				// mid보다 작은 data가 나올때까지 pre를 오른쪽으로 이동시킨다.
 				while (((Comparable) data[pre][sortMethod]).compareTo(mid) > 0) {
 					pre++;
 				}
-				// mid보다 작은 data가 나올때까지 post를 왼쪽으로 이동시킨다.
+				// mid보다 큰 data가 나올때까지 post를 왼쪽으로 이동시킨다.
 				while (((Comparable) mid).compareTo(data[post][sortMethod]) > 0) {
 					post--;
 				}
