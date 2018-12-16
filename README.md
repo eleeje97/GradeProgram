@@ -122,11 +122,11 @@
 
 ![first](JavaProject_readme_img/slide38.JPG)
 
-++ OOP가 아닌 것 같다는 생각을 했다 ++
+~~OOP가 아닌 것 같다...~~
 
 ![first](JavaProject_readme_img/slide39.JPG)
 
-== 해결 방법 : 공유해야 되는 인스턴스를 메소드의 파라미터로 넘겨줬더라면? ==
+**해결 방법 : 공유해야 되는 인스턴스를 메소드의 파라미터로 넘겨줬더라면?**
 
 
 
